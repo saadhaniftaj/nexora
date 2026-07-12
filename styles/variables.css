@@ -1,0 +1,45 @@
+/* ============================================================
+   NEXORA FITNESS — CSS Design Tokens
+   Source: nexora_enhanced_brand_identity.html
+   ============================================================ */
+
+:root {
+  /* ── Colours ────────────────────────────── */
+  --cyan:        #1FB2FE;   /* Primary brand cyan — CTAs, glows, nav hover */
+  --cyan-light:  #5AF0FA;   /* Highlight / X slash motif / glow edge        */
+  --cyan-deep:   #00C2EB;   /* Depth / shadows / anchor                      */
+  --cyan-glow:   rgba(31, 178, 254, 0.12); /* Ambient glow backgrounds       */
+  --cyan-border: rgba(31, 178, 254, 0.20); /* Card borders / dividers        */
+  --cyan-hover:  rgba(31, 178, 254, 0.60); /* Nav / button hover glow        */
+
+  --black:    #080808;  /* Page backgrounds                                  */
+  --dark:     #0f0f0f;  /* Slightly lighter black                            */
+  --surface:  #141414;  /* Card / panel backgrounds                          */
+  --surface2: #1a1a1a;  /* Nested cards / secondary panels                   */
+
+  --white: #ffffff;  /* Headlines / primary text                             */
+  --text:  #f0f0f0;  /* Standard body copy                                   */
+  --muted: #888888;  /* Descriptions / captions / secondary copy             */
+
+  /* ── Typography ────────────────────────── */
+  --font-display: 'Barlow Condensed', sans-serif;  /* Headlines — always uppercase, 900 */
+  --font-body:    'Barlow', sans-serif;             /* Body copy — 300–500               */
+
+  /* ── Spacing ────────────────────────────── */
+  --section-pad-y: clamp(60px, 8vw, 120px);
+  --container-max: 1280px;
+  --container-pad: clamp(20px, 5vw, 80px);
+
+  /* ── Borders / Radius ──────────────────── */
+  --radius-card: 2px;   /* Sharp corners — brand standard */
+  --radius-btn:  2px;
+
+  /* ── Transitions ───────────────────────── */
+  --transition: 0.25s ease;
+
+  /* ── Shadows / Glows ───────────────────── */
+  --glow-sm:  0 0 16px rgba(31, 178, 254, 0.25);
+  --glow-md:  0 0 32px rgba(31, 178, 254, 0.35);
+  --glow-lg:  0 0 60px rgba(31, 178, 254, 0.15);
+  --card-glow: 0 0 40px rgba(31, 178, 254, 0.08);
+}
