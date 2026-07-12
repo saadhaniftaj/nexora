@@ -3,7 +3,6 @@ import ProgramHero from '@/components/sections/programs/ProgramHero'
 import ProgramCards from '@/components/sections/programs/ProgramCards'
 import EquipmentBrands from '@/components/sections/programs/EquipmentBrands'
 import SupportServices from '@/components/sections/programs/SupportServices'
-import CTASection from '@/components/sections/CTASection'
 
 export const metadata: Metadata = {
   title: 'Training Programs | Strength, Conditioning, Sculpt & Shape — Nexora Fitness New Westminster',
@@ -19,7 +18,7 @@ export default function ProgramsPage() {
       <ProgramCards />
       <EquipmentBrands />
       <SupportServices />
-      <CTASection />
+
     </>
   )
 }

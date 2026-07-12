@@ -71,12 +71,9 @@ export default function ProgramCards() {
   return (
     <section className="prog-cards section" aria-labelledby="prog-cards-heading">
       <div className="container">
-        <span className="section-label">Find Your Path</span>
         <h2 id="prog-cards-heading">
-          Programs built for every<br />
-          <span className="text-cyan">version of you.</span>
+          FIND YOUR PATH
         </h2>
-
         {/* Category tabs */}
         <div className="prog-tabs" role="tablist" aria-label="Program categories">
           {TABS.map((tab) => (

@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import FacilityHero from '@/components/sections/facility/FacilityHero'
 import NexoraStandard from '@/components/sections/facility/NexoraStandard'
 import FacilityCards from '@/components/sections/facility/FacilityCards'
-import CTASection from '@/components/sections/CTASection'
 
 export const metadata: Metadata = {
   title: 'The Facility | Premium Gym Floor, Private Washrooms & Fraser River Views — Nexora Fitness',
@@ -17,7 +16,7 @@ export default function FacilityPage() {
       <FacilityHero />
       <NexoraStandard />
       <FacilityCards />
-      <CTASection />
+
     </>
   )
 }

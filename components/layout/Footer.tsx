@@ -4,22 +4,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Instagram, Facebook, Youtube } from 'lucide-react'
 
-const quickLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Programs', href: '/programs' },
-  { label: 'Community', href: '/#community' },
-  { label: 'Blog', href: '/#blog' },
-  { label: 'Contact', href: '/#contact' },
-]
-
-const programLinks = [
-  { label: 'Strength', href: '/programs#strength' },
-  { label: 'Conditioning', href: '/programs#conditioning' },
-  { label: 'Functional Training', href: '/programs#functional' },
-  { label: 'Sculpt & Shape', href: '/programs#sculpt' },
-  { label: 'Active Rehab & Wellness', href: '/programs#rehab' },
-  { label: 'All Programs →', href: '/programs' },
-]
 
 export default function Footer() {
   return (
@@ -38,17 +22,6 @@ export default function Footer() {
             The next evolution of you.<br />
             Empower. Transform. Nexora.
           </p>
-        </div>
-
-        {/* Col 2 — Quick Links + Social */}
-        <div className="footer__col">
-          <h4 className="footer__heading">Quick Links</h4>
-          <nav className="footer__nav">
-            {quickLinks.map((l) => (
-              <Link key={l.label} href={l.href} className="footer__link">{l.label}</Link>
-            ))}
-          </nav>
-          {/* Social media icons under Quick Links per client spec §3.2 */}
           <div className="footer__social">
             <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
               <Instagram size={16} />
@@ -62,16 +35,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Col 3 — Programs */}
-        <div className="footer__col">
-          <h4 className="footer__heading">Programs</h4>
-          <nav className="footer__nav">
-            {programLinks.map((l) => (
-              <Link key={l.label} href={l.href} className="footer__link">{l.label}</Link>
-            ))}
-          </nav>
-        </div>
-
         {/* Col 4 — Contact */}
         <div className="footer__col">
           <h4 className="footer__heading">Contact</h4>
@@ -81,7 +44,7 @@ export default function Footer() {
             <a href="tel:+16041234567" className="footer__link">604-123-4567</a>
             <Link href="/contact" className="footer__link">Leave a Message</Link>
             <a href="mailto:info@nexorafitness.ca" className="footer__link">info@nexorafitness.ca</a>
-            <p className="footer__hours">Mon – Sun: 5:00 AM – 10:00 PM</p>
+            <p className="footer__hours">24/7</p>
           </address>
         </div>
       </div>
@@ -103,8 +66,8 @@ export default function Footer() {
           border-top: 1px solid rgba(31, 178, 254, 0.08);
         }
         .footer__top {
-          display: grid;
-          grid-template-columns: 1.3fr 1fr 1.1fr 1.2fr;
+          display: flex;
+          justify-content: space-between;
           gap: 48px;
           padding-top: 72px;
           padding-bottom: 60px;
@@ -200,9 +163,8 @@ export default function Footer() {
         }
         .footer__legal a:hover { color: var(--cyan); }
 
-        @media (max-width: 1024px) { .footer__top { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 560px) {
-          .footer__top { grid-template-columns: 1fr; gap: 36px; }
+          .footer__top { flex-direction: column; gap: 48px; }
           .footer__bottom-inner { flex-direction: column; text-align: center; }
         }
       `}</style>
