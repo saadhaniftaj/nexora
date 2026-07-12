@@ -43,9 +43,9 @@ export default function HeroSection() {
           <span className="hero__eyebrow">Downtown New Westminster · Coming Soon</span>
 
           <h1 className="hero__headline">
-            <span className="hero__line">Power Fuels You.</span>
-            <span className="hero__line">Progress Shapes You.</span>
-            <span className="hero__line hero__line--cyan">Nexora Transforms You.</span>
+            <span className="hero__line">Power Fuels You</span>
+            <span className="hero__line">Progress Shapes You</span>
+            <span className="hero__line hero__line--cyan">Nexora Transforms You</span>
           </h1>
 
           <p className="hero__sub-tagline">Become Your Next Self</p>

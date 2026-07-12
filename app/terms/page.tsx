@@ -14,7 +14,7 @@ export default function TermsPage() {
       </p>
       
       <div className="prose" style={{ color: 'var(--muted)', lineHeight: 1.8, fontSize: '15px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        <p>Please read these Terms of Service carefully before using the nexorafitness.com website operated by Nexora Fitness.</p>
+        <p>Please read these Terms of Service carefully before using the nexorafitness.ca website operated by Nexora Fitness.</p>
         
         <h2 style={{ color: 'var(--white)', fontSize: '20px', marginTop: '16px', marginBottom: '8px' }}>1. Acceptance of Terms</h2>
         <p>By accessing or using our Site, you agree to be bound by these Terms. If you disagree with any part of the terms, then you may not access the Service.</p>

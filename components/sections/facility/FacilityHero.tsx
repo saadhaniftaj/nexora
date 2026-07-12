@@ -37,15 +37,12 @@ export default function FacilityHero() {
         <div className="facility-hero__text">
           <span className="section-label">The Nexora Facility</span>
           <h1>
-            Built for serious training.<br />
-            <span className="text-cyan">Designed for your next self.</span>
+            Built for serious training<br />
+            <span className="text-cyan">Designed for your next self</span>
           </h1>
           <p>
             A premium fitness environment in Downtown New Westminster — curated equipment, open training space, private washrooms, on-site recovery, and a riverfront setting unlike anything else in the city.
           </p>
-          <Link href="#waitlist" className="btn-primary facility-hero__cta">
-            Become A Founding Member <ArrowRight size={16} />
-          </Link>
         </div>
       </div>
 

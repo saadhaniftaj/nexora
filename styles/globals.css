@@ -146,3 +146,26 @@ p { font-family: var(--font-body); font-size: clamp(14px, 1.2vw, 17px); color: v
 
 /* ── Selection ── */
 ::selection { background: var(--cyan); color: var(--black); }
+
+/* ── Cyber Angled Border ── */
+section {
+  position: relative;
+}
+
+section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -50px;
+  right: 0;
+  height: 32px;
+  border-bottom: 2px solid var(--cyan);
+  border-right: 2px solid var(--cyan);
+  background: radial-gradient(ellipse 120% 100% at bottom right, rgba(31, 178, 254, 0.4) 0%, rgba(31, 178, 254, 0.1) 40%, transparent 100%);
+  transform: skewX(-45deg);
+  transform-origin: top right;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 1.5px));
+  filter: drop-shadow(0 0 6px rgba(31,178,254,0.6));
+  pointer-events: none;
+  z-index: 10;
+}

@@ -44,15 +44,12 @@ export default function ProgramHero() {
           <h1>
             Programs Built<br />
             For <span className="text-cyan">Every</span><br />
-            Version Of You.
+            Version Of You
           </h1>
           <p>
             From elite strength athletes to those starting their first serious fitness journey —
             Nexora has a structured program to get you where you're going.
           </p>
-          <Link href="#waitlist" className="btn-primary">
-            Get Early Access <ArrowRight size={16} />
-          </Link>
         </div>
       </div>
 

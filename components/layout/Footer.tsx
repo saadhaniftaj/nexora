@@ -12,7 +12,7 @@ export default function Footer() {
         {/* Col 1 — Brand */}
         <div className="footer__brand">
           <Image
-            src="/logos/nexora-full.png"
+            src="/logos/nexora-wordmark.png"
             alt="Nexora Fitness"
             width={130}
             height={38}

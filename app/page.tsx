@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Nexora Fitness',
   description:
     'Nexora Fitness is coming soon to River Market, Downtown New Westminster. 5,000 sq ft premium training floor with Atlantis Strength, Bootybuilder, Core Health & Wellness, Shua, Xmaster & Torque equipment. Fraser River views, private washrooms, on-site physio & cold plunge. Join the founding member waitlist.',
-  alternates: { canonical: 'https://nexorafitness.com' },
+  alternates: { canonical: 'https://nexorafitness.ca' },
 }
 
 export default function HomePage() {

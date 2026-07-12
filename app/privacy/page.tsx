@@ -14,7 +14,7 @@ export default function PrivacyPage() {
       </p>
       
       <div className="prose" style={{ color: 'var(--muted)', lineHeight: 1.8, fontSize: '15px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        <p>At Nexora Fitness, we take your privacy seriously. This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make a purchase from nexorafitness.com.</p>
+        <p>At Nexora Fitness, we take your privacy seriously. This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make a purchase from nexorafitness.ca.</p>
         
         <h2 style={{ color: 'var(--white)', fontSize: '20px', marginTop: '16px', marginBottom: '8px' }}>1. Information We Collect</h2>
         <p>When you visit the Site, we automatically collect certain information about your device, including information about your web browser, IP address, time zone, and some of the cookies that are installed on your device.</p>

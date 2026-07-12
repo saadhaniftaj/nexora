@@ -9,7 +9,6 @@ const navLinks = [
   { label: 'Programs', href: '/programs' },
   { label: 'Facilities', href: '/facility' },
   { label: 'Community', href: '/#community' },
-  { label: 'Blog', href: '/#blog' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -50,7 +49,7 @@ export default function Header() {
 
           {/* CTA */}
           <Link href="/#waitlist" className="btn-primary header__cta">
-            <span className="header__cta-slash">/</span> Join Nexora
+            Join Nexora
           </Link>
 
           {/* Hamburger */}
@@ -154,17 +153,10 @@ export default function Header() {
           box-shadow: 0 0 16px rgba(31, 178, 254, 0.25);
           transition: all 0.25s ease;
         }
-        .header__cta-slash {
-          color: rgba(8,8,8,0.5);
-          font-size: 14px;
-          font-weight: 900;
-          line-height: 1;
-        }
         .header__cta:hover {
           box-shadow: 0 0 32px rgba(31, 178, 254, 0.7), 0 0 60px rgba(31, 178, 254, 0.2);
           transform: translateY(-2px);
         }
-        .header__cta:hover .header__cta-slash { color: rgba(0,0,0,0.35); }
 
         /* Hamburger */
         .header__hamburger {

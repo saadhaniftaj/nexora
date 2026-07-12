@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     'conditioning gym New Westminster',
     'active rehab wellness gym BC',
   ],
-  metadataBase: new URL('https://nexorafitness.com'),
+  metadataBase: new URL('https://nexorafitness.ca'),
   alternates: {
-    canonical: 'https://nexorafitness.com',
+    canonical: 'https://nexorafitness.ca',
   },
   openGraph: {
     title: 'Nexora Fitness',
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
       "Power. Progress. Nexora. Join the founding member waitlist for New Westminster's most premium fitness facility. Fraser River views, curated equipment, private washrooms, on-site physio.",
     type: 'website',
     locale: 'en_CA',
-    url: 'https://nexorafitness.com',
+    url: 'https://nexorafitness.ca',
     siteName: 'Nexora Fitness',
   },
   twitter: {
@@ -84,9 +84,9 @@ const jsonLd = {
   name: 'Nexora Fitness',
   description:
     'Premium fitness facility at River Market, Downtown New Westminster, BC. Curated equipment, Fraser River views, private washrooms, physio, cold plunge & sauna.',
-  url: 'https://nexorafitness.com',
-  logo: 'https://nexorafitness.com/logos/nexora-wordmark.png',
-  image: 'https://nexorafitness.com/images/hero/hero-home.png',
+  url: 'https://nexorafitness.ca',
+  logo: 'https://nexorafitness.ca/logos/nexora-wordmark.png',
+  image: 'https://nexorafitness.ca/images/hero/hero-home.png',
   priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
