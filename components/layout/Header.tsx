@@ -10,6 +10,7 @@ const navLinks = [
   { label: 'Facilities', href: '/facility' },
   { label: 'Community', href: '/#community' },
   { label: 'Blog', href: '/#blog' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export default function Header() {

@@ -79,6 +79,7 @@ export default function Footer() {
             <p>River Market at Westminster Quay</p>
             <p>New Westminster, BC V3M 6G5</p>
             <a href="tel:+16041234567" className="footer__link">604-123-4567</a>
+            <Link href="/contact" className="footer__link">Leave a Message</Link>
             <a href="mailto:info@nexorafitness.ca" className="footer__link">info@nexorafitness.ca</a>
             <p className="footer__hours">Mon – Sun: 5:00 AM – 10:00 PM</p>
           </address>
