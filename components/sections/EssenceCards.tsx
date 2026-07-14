@@ -45,14 +45,6 @@ const cards = [
     body: 'Nexora is designed to support more than workouts. Our on-site physio and massage room creates a direct connection between training, recovery, and long-term performance.',
     img: '/images/sections/card-rehab.png',
   },
-  {
-    id: 6,
-    eyebrow: 'Recovery — Coming Soon',
-    title: 'Cold Plunge & Sauna',
-    sub: 'Recovery infrastructure already built in. True progress doesn\'t end when your workout does.',
-    body: 'Cold plunge and sauna infrastructure have been planned into the Nexora experience — giving our members access to tools that support performance, longevity, and better training.',
-    img: '/images/sections/card-recovery.png',
-  },
 ]
 
 export default function EssenceCards() {
