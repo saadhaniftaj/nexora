@@ -24,6 +24,7 @@
   /* ── Typography ────────────────────────── */
   --font-display: 'Barlow Condensed', sans-serif;  /* Headlines — always uppercase, 900 */
   --font-body:    'Barlow', sans-serif;             /* Body copy — 300–500               */
+  --font-orbitron: 'Orbitron', sans-serif;          /* Tech/Cyber display headlines      */
 
   /* ── Spacing ────────────────────────────── */
   --section-pad-y: clamp(60px, 8vw, 120px);

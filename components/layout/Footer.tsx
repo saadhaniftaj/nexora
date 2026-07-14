@@ -69,11 +69,11 @@ export default function Footer() {
           display: flex;
           justify-content: space-between;
           gap: 48px;
-          padding-top: 72px;
-          padding-bottom: 60px;
+          padding-top: 18px;
+          padding-bottom: 15px;
         }
-        .footer__brand { display: flex; flex-direction: column; gap: 18px; }
-        .footer__tagline { font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 210px; }
+        .footer__brand { display: flex; flex-direction: column; gap: 9px; }
+        .footer__tagline { font-size: 14px; color: var(--muted); line-height: 1.4; max-width: 210px; }
 
         .footer__heading {
           font-family: var(--font-display);
@@ -82,14 +82,14 @@ export default function Footer() {
           letter-spacing: 0.18em;
           text-transform: uppercase;
           color: var(--white);
-          margin-bottom: 18px;
+          margin-bottom: 9px;
         }
         .footer__col { display: flex; flex-direction: column; }
         .footer__nav {
           display: flex;
           flex-direction: column;
-          gap: 10px;
-          margin-bottom: 20px;
+          gap: 5px;
+          margin-bottom: 10px;
         }
         .footer__link {
           font-size: 14px;
@@ -104,7 +104,7 @@ export default function Footer() {
         .footer__social {
           display: flex;
           gap: 12px;
-          margin-top: 4px;
+          margin-top: 2px;
         }
         .footer__social a {
           display: flex;
@@ -126,7 +126,7 @@ export default function Footer() {
         .footer__address {
           display: flex;
           flex-direction: column;
-          gap: 9px;
+          gap: 4px;
           font-style: normal;
         }
         .footer__address p { font-size: 14px; color: var(--muted); margin: 0; }
@@ -134,7 +134,7 @@ export default function Footer() {
 
         .footer__bottom {
           border-top: 1px solid rgba(255,255,255,0.04);
-          padding: 20px 0;
+          padding: 10px 0;
         }
         .footer__bottom-inner {
           display: flex;

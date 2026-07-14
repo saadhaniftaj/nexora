@@ -2,38 +2,38 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Dumbbell, Heart, Zap, Leaf } from 'lucide-react'
 
 const programs = [
   {
     id: 1,
-    label: 'Strength & Power',
-    headline: 'Build the body\nyou\'re capable of.',
-    body: 'Plate-loaded machines, free weights, and structured progressive overload for those who train with intention.',
+    Icon: Dumbbell,
+    label: 'STRENGTH',
+    body: 'Build muscle, increase power and dominate your limits.',
     img: '/images/sections/card-strength.png',
     href: '/programs',
   },
   {
     id: 2,
-    label: 'Conditioning',
-    headline: 'Push your\ncardiovascular ceiling.',
-    body: 'Curved treadmills, bikes, and HIIT protocols designed to build real-world endurance and metabolic output.',
+    Icon: Heart,
+    label: 'LEAN & FIT',
+    body: 'Sculpt your body, burn fat and boost your energy.',
     img: '/images/sections/card-conditioning.png',
     href: '/programs',
   },
   {
     id: 3,
-    label: 'Functional Training',
-    headline: 'Move better.\nPerform harder.',
-    body: 'Sled drives, kettlebell circuits, and TRX — movement patterns that translate to every goal.',
+    Icon: Zap,
+    label: 'PERFORMANCE',
+    body: 'Improve speed, agility and athletic performance.',
     img: '/images/sections/card-functional.png',
     href: '/programs',
   },
   {
     id: 4,
-    label: 'Sculpt & Shape',
-    headline: 'Define every\ndetail.',
-    body: 'Isolation machines and targeted routines for those focused on body composition and sculpting a specific physique.',
+    Icon: Leaf,
+    label: 'MIND & WELLNESS',
+    body: 'Strengthen your mind, reduce stress and find balance.',
     img: '/images/sections/card-sculpt.png',
     href: '/programs',
   },
@@ -43,15 +43,11 @@ export default function ProgramsSection() {
   return (
     <section id="programs" className="programs section" aria-labelledby="programs-heading">
       <div className="container">
-        <span className="section-label">Training Programs</span>
         <div className="programs__header">
-          <h2 id="programs-heading">
-            A Program For<br />
-            <span className="text-cyan">Every Goal.</span>
+          <span className="section-label programs__eyebrow">TRAIN. TRANSFORM. THRIVE.</span>
+          <h2 id="programs-heading" style={{ whiteSpace: 'nowrap' }}>
+            PROGRAMS FOR EVERY YOU.
           </h2>
-          <Link href="/programs" className="btn-outline">
-            View All Programs <ArrowRight size={15} />
-          </Link>
         </div>
 
         <div className="programs__grid">
@@ -61,9 +57,11 @@ export default function ProgramsSection() {
                 <Image src={prog.img} alt={prog.label} fill sizes="(max-width:900px) 100vw, 25vw" style={{ objectFit: 'cover' }} />
                 <div className="prog-card__overlay" />
               </div>
+              <div className="prog-card__icon-wrapper">
+                <prog.Icon size={22} />
+              </div>
               <div className="prog-card__body">
-                <span className="prog-card__label">{prog.label}</span>
-                <h3 className="prog-card__title" style={{ whiteSpace: 'pre-line' }}>{prog.headline}</h3>
+                <h3 className="prog-card__label">{prog.label}</h3>
                 <p className="prog-card__desc">{prog.body}</p>
                 <Link href={prog.href} className="prog-card__cta">
                   Explore Program <ArrowRight size={14} />
@@ -72,16 +70,30 @@ export default function ProgramsSection() {
             </article>
           ))}
         </div>
+
+        <div className="programs__footer">
+          <Link href="/programs" className="btn-outline">
+            View All Programs <ArrowRight size={15} />
+          </Link>
+        </div>
       </div>
 
       <style jsx>{`
         .programs__header {
           display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          margin: 8px 0 52px;
-          gap: 24px;
-          flex-wrap: wrap;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          margin: 0 auto 52px;
+          max-width: 600px;
+        }
+        .programs__header :global(.programs__eyebrow::before) {
+          display: none;
+        }
+        .programs__footer {
+          display: flex;
+          justify-content: center;
+          margin-top: 50px;
         }
         .programs__grid {
           display: grid;
@@ -120,35 +132,54 @@ export default function ProgramsSection() {
         .prog-card__overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to bottom, transparent 50%, var(--surface) 100%);
+          background: linear-gradient(to bottom, transparent 30%, var(--surface) 100%);
+        }
+        .prog-card__icon-wrapper {
+          position: absolute;
+          top: 260px;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          background: var(--surface);
+          border: 1px solid rgba(255,255,255,0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--cyan);
+          box-shadow: 0 0 15px rgba(255,255,255,0.15);
+          transition: all 0.3s ease;
+          z-index: 10;
+        }
+        .prog-card:hover .prog-card__icon-wrapper {
+          color: var(--white);
+          box-shadow: 0 0 25px rgba(255,255,255,0.6);
+          border-color: rgba(255,255,255,0.4);
         }
         .prog-card__body {
-          padding: 20px 22px 24px;
+          padding: 46px 22px 28px;
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          align-items: center;
+          text-align: center;
+          gap: 16px;
           flex: 1;
         }
         .prog-card__label {
-          font-family: var(--font-display);
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: var(--cyan);
-        }
-        .prog-card__title {
           font-size: clamp(18px, 1.8vw, 24px);
-          color: var(--white);
-          margin: 4px 0 6px;
-          line-height: 1.1;
+          font-weight: 900;
           letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: var(--white);
+          margin: 0;
         }
         .prog-card__desc {
           font-size: 13px;
           color: var(--muted);
           line-height: 1.6;
           flex: 1;
+          margin: 0;
         }
         .prog-card__cta {
           display: inline-flex;
@@ -162,10 +193,11 @@ export default function ProgramsSection() {
           color: var(--cyan);
           text-decoration: none;
           margin-top: 8px;
-          transition: gap 0.2s ease;
+          transition: all 0.2s ease;
+          text-shadow: 0 0 8px rgba(31, 178, 254, 0.4);
         }
-        .prog-card__cta:hover { gap: 10px; }
-        .prog-card:hover .prog-card__cta { gap: 10px; }
+        .prog-card__cta:hover { gap: 10px; text-shadow: 0 0 16px rgba(31, 178, 254, 0.9); }
+        .prog-card:hover .prog-card__cta { gap: 10px; text-shadow: 0 0 16px rgba(31, 178, 254, 0.9); }
 
         @media (max-width: 1024px) {
           .programs__grid { grid-template-columns: repeat(2, 1fr); }

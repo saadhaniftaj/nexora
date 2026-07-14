@@ -60,41 +60,75 @@ export default function EquipmentBrands() {
           Every brand on this floor was chosen after rigorous research into biomechanics, durability, and athlete performance. We don&apos;t carry fillers.
         </p>
 
-        <div className="equipment__grid">
-          {brands.map((brand) => (
-            <div key={brand.name} className="equip-card">
-              <div className="equip-card__logo-wrap">
-                <Image
-                  src={brand.logo}
-                  alt={`${brand.name} logo`}
-                  fill
-                  sizes="200px"
-                  style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: 0.75 }}
-                />
-              </div>
-              <span className="equip-card__name">{brand.name}</span>
-              <div className="equip-card__links">
-                <a href={brand.url} target="_blank" rel="noopener noreferrer" className="equip-card__link">
-                  Website ↗
-                </a>
-                <span className="equip-card__sep">·</span>
-                <a href={brand.ig} target="_blank" rel="noopener noreferrer" className="equip-card__link equip-card__link--ig">
-                  {brand.igHandle}
-                </a>
-              </div>
+        <div className="marquee-wrapper">
+          <div className="marquee-container">
+            <div className="marquee-track">
+              {brands.map((brand) => (
+                <div key={brand.name} className="equip-card">
+                  <div className="equip-card__logo-wrap">
+                    <Image
+                      src={brand.logo}
+                      alt={`${brand.name} logo`}
+                      fill
+                      sizes="200px"
+                      style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: 0.75 }}
+                    />
+                  </div>
+                  <span className="equip-card__name">{brand.name}</span>
+                  <div className="equip-card__links">
+                    <a href={brand.url} target="_blank" rel="noopener noreferrer" className="equip-card__link">
+                      Website ↗
+                    </a>
+                    <span className="equip-card__sep">·</span>
+                    <a href={brand.ig} target="_blank" rel="noopener noreferrer" className="equip-card__link equip-card__link--ig">
+                      {brand.igHandle}
+                    </a>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+            <div className="marquee-track mobile-only" aria-hidden="true">
+              {brands.map((brand) => (
+                <div key={`${brand.name}-dup`} className="equip-card">
+                  <div className="equip-card__logo-wrap">
+                    <Image
+                      src={brand.logo}
+                      alt={`${brand.name} logo`}
+                      fill
+                      sizes="200px"
+                      style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: 0.75 }}
+                    />
+                  </div>
+                  <span className="equip-card__name">{brand.name}</span>
+                  <div className="equip-card__links">
+                    <a href={brand.url} target="_blank" rel="noopener noreferrer" className="equip-card__link" tabIndex={-1}>
+                      Website ↗
+                    </a>
+                    <span className="equip-card__sep">·</span>
+                    <a href={brand.ig} target="_blank" rel="noopener noreferrer" className="equip-card__link equip-card__link--ig" tabIndex={-1}>
+                      {brand.igHandle}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
       <style jsx>{`
         .equipment h2 { margin: 8px 0 16px; }
         .equipment__intro { max-width: 520px; margin-bottom: 52px; }
-        .equipment__grid {
+        
+        .marquee-track {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 16px;
         }
+        .marquee-track.mobile-only {
+          display: none;
+        }
+
         .equip-card {
           display: flex;
           flex-direction: column;
@@ -144,8 +178,36 @@ export default function EquipmentBrands() {
         }
         .equip-card__link:hover { opacity: 0.65; }
 
-        @media (max-width: 900px) { .equipment__grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 480px) { .equipment__grid { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) {
+          .marquee-wrapper {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            overflow: hidden;
+            padding: 10px 0;
+          }
+          .marquee-container {
+            display: flex;
+            gap: 16px;
+          }
+          .marquee-track {
+            display: flex;
+            gap: 16px;
+            flex-shrink: 0;
+            animation: marquee 25s linear infinite;
+          }
+          .marquee-track.mobile-only {
+            display: flex;
+          }
+          .equip-card {
+            width: 260px;
+            flex-shrink: 0;
+          }
+        }
+        
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-100% - 16px)); }
+        }
       `}</style>
     </section>
   )

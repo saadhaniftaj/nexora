@@ -1,5 +1,5 @@
 @import './variables.css';
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -49,13 +49,12 @@ h4 { font-size: clamp(16px, 2vw, 24px); }
 p { font-family: var(--font-body); font-size: clamp(14px, 1.2vw, 17px); color: var(--muted); line-height: 1.75; }
 
 /* ── Buttons ── */
-.btn-primary {
+.btn-primary, .btn-outline {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 14px 32px;
-  background: var(--cyan);
-  color: var(--black);
   font-family: var(--font-display);
   font-size: 14px;
   font-weight: 700;
@@ -63,39 +62,46 @@ p { font-family: var(--font-body); font-size: clamp(14px, 1.2vw, 17px); color: v
   text-transform: uppercase;
   text-decoration: none;
   border: none;
-  border-radius: var(--radius-btn);
+  background: transparent;
   cursor: pointer;
+  z-index: 1;
   transition: all var(--transition);
-}
-.btn-primary:hover {
-  background: #fff;
-  box-shadow: var(--glow-md);
-  transform: translateY(-2px);
 }
 
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 13px 32px;
-  background: transparent;
-  color: var(--white);
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.25);
+.btn-primary { color: var(--black); }
+.btn-outline { color: var(--white); }
+
+.btn-primary::before, .btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: skewX(-15deg);
   border-radius: var(--radius-btn);
-  cursor: pointer;
   transition: all var(--transition);
 }
-.btn-outline:hover {
-  border-color: var(--cyan);
-  color: var(--cyan);
-  box-shadow: 0 0 20px rgba(31, 178, 254, 0.15);
+
+.btn-primary::before {
+  background: var(--cyan);
+}
+.btn-primary:hover {
   transform: translateY(-2px);
+}
+.btn-primary:hover::before {
+  background: #fff;
+  box-shadow: var(--glow-md);
+}
+
+.btn-outline::before {
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn-outline:hover {
+  color: var(--cyan);
+  transform: translateY(-2px);
+}
+.btn-outline:hover::before {
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(31, 178, 254, 0.15);
 }
 
 /* ── Cyan accent text ── */

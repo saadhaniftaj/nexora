@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import { ArrowRight, ChevronDown } from 'lucide-react'
+import ScrollDown from '@/components/ui/ScrollDown'
 
 export default function HeroSection() {
   const bgRef = useRef<HTMLDivElement>(null)
@@ -42,11 +43,17 @@ export default function HeroSection() {
         <div className="hero__text">
           <span className="hero__eyebrow">Downtown New Westminster · Coming Soon</span>
 
-          <h1 className="hero__headline">
-            <span className="hero__line">Power Fuels You</span>
-            <span className="hero__line">Progress Shapes You</span>
-            <span className="hero__line hero__line--cyan">Nexora Transforms You</span>
-          </h1>
+          <div className="hero__headline-wrapper">
+            <div className="hero__left-line" />
+            <h1 className="hero__headline">
+              <span className="hero__line"><span className="text-cyan text-glow-cyan">POWER</span></span>
+              <span className="hero__line"><span className="text-glow-white">FUELS YOU.</span></span>
+              <span className="hero__line"><span className="text-cyan text-glow-cyan">PROGRESS</span></span>
+              <span className="hero__line"><span className="text-glow-white">SHAPES YOU.</span></span>
+              <span className="hero__line"><span className="text-cyan text-glow-cyan">NE<img src="/logos/HERONEXORAX.png" alt="X" className="nexora-img-x" />ORA</span></span>
+              <span className="hero__line"><span className="text-glow-white">TRANSFORMS YOU.</span></span>
+            </h1>
+          </div>
 
           <p className="hero__sub-tagline">Become Your Next Self</p>
 
@@ -62,10 +69,7 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="hero__scroll">
-        <ChevronDown size={20} />
-        <span>Scroll</span>
-      </div>
+      <ScrollDown />
 
       <style jsx>{`
         .hero {
@@ -78,47 +82,39 @@ export default function HeroSection() {
         }
         .hero__bg-wrap {
           position: absolute;
-          top: -15%;
-          bottom: -15%;
-          left: 0;
-          right: 0;
+          inset: -100px;
+          z-index: 0;
           will-change: transform;
-          /* Slow Ken Burns zoom-out: starts slightly in, slowly pulls back */
           animation: heroZoomOut 14s ease-out forwards;
         }
         @keyframes heroZoomOut {
-          from { scale: 1.14; }
-          to   { scale: 1.0; }
+          from { transform: scale(1.15); }
+          to { transform: scale(1); }
         }
         .hero__overlay-left {
           position: absolute;
           inset: 0;
-          background: linear-gradient(
-            105deg,
-            rgba(8,8,8,0.95) 0%,
-            rgba(8,8,8,0.75) 55%,
-            rgba(8,8,8,0.15) 100%
-          );
+          background: linear-gradient(90deg, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.7) 40%, transparent 100%);
           z-index: 1;
+          pointer-events: none;
         }
         .hero__overlay-bottom {
           position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 220px;
-          background: linear-gradient(to top, var(--black), transparent);
+          inset: 0;
+          background: linear-gradient(0deg, rgba(8,8,8,1) 0%, rgba(8,8,8,0) 25%);
           z-index: 1;
+          pointer-events: none;
         }
+
         .hero__content {
           position: relative;
           z-index: 2;
-          padding-top: 24px;
+          width: 100%;
         }
-        .hero__text { max-width: 700px; }
+        .hero__text { max-width: 800px; }
 
         .hero__eyebrow {
-          display: inline-flex;
+          display: flex;
           align-items: center;
           gap: 10px;
           font-family: var(--font-display);
@@ -138,15 +134,58 @@ export default function HeroSection() {
           box-shadow: 0 0 8px rgba(31,178,254,0.6);
         }
 
+        .hero__headline-wrapper {
+          position: relative;
+          padding-left: 24px;
+          margin: 0 0 20px;
+        }
+        .hero__left-line {
+          position: absolute;
+          left: 0;
+          top: 4px;
+          bottom: 4px;
+          width: 4px;
+          background: var(--cyan);
+          box-shadow: 0 0 16px rgba(31, 178, 254, 0.8), 0 0 32px rgba(31, 178, 254, 0.4);
+          transform: skewX(-8deg);
+          border-radius: 2px;
+          -webkit-mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 100%);
+        }
+
         .hero__headline {
           display: flex;
           flex-direction: column;
-          margin: 0 0 20px;
+          font-family: var(--font-orbitron);
           font-size: clamp(42px, 6.5vw, 90px);
-          line-height: 1.0;
+          font-weight: 800;
+          line-height: 0.85;
+          margin: 0;
+          text-transform: uppercase;
         }
         .hero__line { display: block; }
-        .hero__line--cyan { color: var(--cyan); text-shadow: 0 0 30px rgba(31,178,254,0.4); }
+        .hero__line:nth-child(1) { margin-left: clamp(40px, 6vw, 80px); }
+        .hero__line:nth-child(2) { margin-left: clamp(32px, 4.8vw, 64px); margin-top: -0.15em; }
+        .hero__line:nth-child(3) { margin-left: clamp(24px, 3.6vw, 48px); }
+        .hero__line:nth-child(4) { margin-left: clamp(16px, 2.4vw, 32px); margin-top: -0.15em; }
+        .hero__line:nth-child(5) { margin-left: clamp(8px, 1.2vw, 16px); }
+        .hero__line:nth-child(6) { margin-left: 0; margin-top: -0.35em; }
+        .text-cyan { color: var(--cyan); }
+        .text-glow-cyan { text-shadow: 0 0 30px rgba(31,178,254,0.6); }
+        .text-glow-white { 
+          text-shadow: 0 0 24px rgba(255,255,255,0.4); 
+          font-size: 0.7em;
+        }
+
+        .nexora-img-x {
+          height: 1.4em;
+          width: auto;
+          margin: 0 -0.55em 0 -0.5em;
+          display: inline-block;
+          vertical-align: middle;
+          transform: translateY(0%);
+          filter: drop-shadow(0 0 24px rgba(31, 178, 254, 0.8));
+        }
 
         .hero__sub-tagline {
           font-family: var(--font-display);
@@ -177,29 +216,6 @@ export default function HeroSection() {
           transition: opacity 0.3s ease;
         }
         .hero__btn-primary:hover::after { opacity: 1; }
-
-        .hero__scroll {
-          position: absolute;
-          bottom: 36px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 2;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 6px;
-          color: var(--muted);
-          font-family: var(--font-display);
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-          animation: heroScrollBounce 2s ease-in-out infinite;
-        }
-        @keyframes heroScrollBounce {
-          0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
-          50% { transform: translateX(-50%) translateY(7px); opacity: 1; }
-        }
       `}</style>
     </section>
   )

@@ -62,64 +62,91 @@ export default function EssenceCards() {
 
   return (
     <section id="essence" className="essence section" aria-labelledby="essence-heading">
+      <div className="essence__bg">
+        <Image src="/images/nexora_reception_bg.png" alt="Nexora Reception" fill sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center' }} />
+        <div className="essence__bg-overlay" />
+      </div>
       <div className="container">
         <span className="section-label">Nexora Essence</span>
         <h2 id="essence-heading">
-          The gym New Westminster<br />
-          <span className="text-cyan">deserved.</span>
+          The gym New Westminster deserved.
         </h2>
         <p className="essence__intro">
           Nexora isn't an upgrade to what's already here — it's what's been missing. A facility built around real training, real recovery, and a location that nothing else in the city can match.
         </p>
 
-        <div className="essence__grid">
-          {visible.map((card) => (
-            <article key={card.id} className="essence__card">
-              <div className="essence__card-img">
-                <Image src={card.img} alt={card.title} fill sizes="400px" style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }} />
-                <div className="essence__card-img-overlay" />
-              </div>
-              <div className="essence__card-body">
-                <span className="essence__card-eyebrow">{card.eyebrow}</span>
-                <h3 className="essence__card-title">{card.title}</h3>
-                <p className="essence__card-sub">{card.sub}</p>
-                <p className="essence__card-body-text">{card.body}</p>
-              </div>
-              <div className="essence__card-bar" />
-            </article>
-          ))}
-        </div>
-
-        <div className="essence__nav">
-          <div className="essence__dots">
-            {pages.map((_, i) => (
-              <button
-                key={i}
-                className={`essence__dot ${page === i ? 'active' : ''}`}
-                onClick={() => setPage(i)}
-                aria-label={`Page ${i + 1}`}
-              />
-            ))}
+        <div className="essence__content-wrapper">
+          <div className="essence__grid-container">
+            <div className="essence__grid">
+              {visible.map((card) => (
+                <article key={card.id} className="essence__card">
+                  <div className="essence__card-img">
+                    <Image src={card.img} alt={card.title} fill sizes="400px" style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }} />
+                    <div className="essence__card-img-overlay" />
+                  </div>
+                  <div className="essence__card-body">
+                    <span className="essence__card-eyebrow">{card.eyebrow}</span>
+                    <h3 className="essence__card-title">{card.title}</h3>
+                    <p className="essence__card-sub">{card.sub}</p>
+                    <p className="essence__card-body-text">{card.body}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="essence__grid-bar" />
           </div>
+          
           <button
-            className="essence__arrow"
+            className="essence__side-arrow"
             onClick={() => setPage((p) => (p === 0 ? 1 : 0))}
             aria-label="Next cards"
           >
-            <ArrowRight size={18} />
+            <ArrowRight size={24} />
           </button>
         </div>
       </div>
 
       <style jsx>{`
-        .essence { padding-top: 100px; }
-        .essence h2 { margin: 8px 0 18px; }
+        .essence { 
+          position: relative;
+          padding-top: 100px; 
+          z-index: 1;
+        }
+        .essence__bg {
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          opacity: 0.15;
+          pointer-events: none;
+        }
+        .essence__bg-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom, var(--black) 0%, transparent 15%, transparent 85%, var(--black) 100%);
+        }
+
+        .essence h2 { 
+          margin: 8px 0 18px; 
+          font-size: clamp(32px, 4.5vw, 64px);
+          white-space: nowrap;
+        }
         .essence__intro { max-width: 580px; margin-bottom: 52px; font-size: 16px; line-height: 1.75; }
+
+        .essence__content-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+        }
+
+        .essence__grid-container {
+          flex: 1;
+          position: relative;
+        }
 
         .essence__grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
+          gap: 0;
         }
 
         .essence__card {
@@ -135,10 +162,6 @@ export default function EssenceCards() {
           transform: scale(1.03) translateY(-4px);
           border-color: var(--cyan-border);
           box-shadow: 0 0 40px rgba(31,178,254,0.15);
-        }
-        .essence__card:hover .essence__card-body-text {
-          max-height: 80px;
-          opacity: 1;
         }
         .essence__card:hover :global(img) {
           transform: scale(1.06);
@@ -179,73 +202,53 @@ export default function EssenceCards() {
           line-height: 1.5;
           margin: 0;
         }
-        /* Extended text revealed on hover */
+        /* Fixed text (no expansion) */
         .essence__card-body-text {
           font-size: 13px;
           color: var(--muted);
           line-height: 1.65;
-          max-height: 0;
-          opacity: 0;
-          overflow: hidden;
-          transition: max-height 0.35s ease, opacity 0.35s ease;
-          margin: 0;
+          margin: 10px 0 0 0;
         }
 
-        .essence__card-bar {
+        .essence__grid-bar {
           position: absolute;
           left: 0;
-          top: 0;
+          right: 0;
           bottom: 0;
-          width: 3px;
+          height: 3px;
           background: var(--cyan);
-          box-shadow: 0 0 10px rgba(31,178,254,0.5);
-          opacity: 0;
-          transition: opacity 0.3s ease;
+          box-shadow: 0 0 16px rgba(31,178,254,0.6);
+          opacity: 1;
+          pointer-events: none;
+          z-index: 10;
         }
-        .essence__card:hover .essence__card-bar { opacity: 1; }
 
-        .essence__nav {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-top: 36px;
-        }
-        .essence__dots { display: flex; gap: 8px; }
-        .essence__dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: rgba(255,255,255,0.18);
-          border: none;
-          cursor: pointer;
-          transition: all 0.25s ease;
-        }
-        .essence__dot.active {
-          background: var(--cyan);
-          box-shadow: 0 0 8px rgba(31,178,254,0.6);
-          transform: scale(1.3);
-        }
-        .essence__arrow {
+        .essence__side-arrow {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 40px;
-          height: 40px;
-          border: 1px solid var(--cyan-border);
-          background: transparent;
+          width: 50px;
+          height: 50px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.03);
           color: var(--cyan);
-          border-radius: 2px;
+          border-radius: 50%;
           cursor: pointer;
           transition: all 0.25s ease;
-          margin-left: 8px;
+          flex-shrink: 0;
         }
-        .essence__arrow:hover {
+        .essence__side-arrow:hover {
           background: var(--cyan);
           color: var(--black);
+          border-color: var(--cyan);
           box-shadow: var(--glow-sm);
         }
 
-        @media (max-width: 900px) { .essence__grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 900px) { 
+          .essence__content-wrapper { flex-direction: column; align-items: stretch; }
+          .essence__grid { grid-template-columns: repeat(2, 1fr); } 
+          .essence__side-arrow { align-self: flex-end; }
+        }
         @media (max-width: 560px) { .essence__grid { grid-template-columns: 1fr; } }
       `}</style>
     </section>

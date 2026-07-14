@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
+import ScrollDown from '@/components/ui/ScrollDown'
 import { ArrowRight } from 'lucide-react'
 
 export default function ProgramHero() {
@@ -52,6 +53,7 @@ export default function ProgramHero() {
           </p>
         </div>
       </div>
+      <ScrollDown />
 
       <style jsx>{`
         .prog-hero {

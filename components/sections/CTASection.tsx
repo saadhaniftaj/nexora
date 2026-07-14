@@ -46,15 +46,11 @@ export default function CTASection() {
           <span className="section-label" style={{ color: 'rgba(255,255,255,0.6)' }}>
             Your Next Evolution Starts Here
           </span>
-          <h2 id="cta-heading">
-            Become Your<br />
-            <span className="text-cyan">Next Self.</span>
+          <h2 id="cta-heading" style={{ fontSize: 'clamp(32px, 4.5vw, 60px)', whiteSpace: 'nowrap' }}>
+            Become Your <span className="text-cyan">Next Self.</span>
           </h2>
           <p>
             Commit to yourself. Trust the process. Become your next self.
-          </p>
-          <p style={{ marginTop: '12px' }}>
-            Join our waitlist and be among the first 100 to lock in founding member pricing — for life.
           </p>
         </div>
 
@@ -71,7 +67,7 @@ export default function CTASection() {
             </div>
           ) : (
             <form className="cta-section__form" onSubmit={handleSubmit} noValidate>
-              <p className="cta-section__form-eyebrow">Join Our Waitlist</p>
+              <p className="cta-section__form-eyebrow">JOIN NEXORA</p>
               <h3 style={{ marginBottom: '28px', fontSize: 'clamp(22px, 2.5vw, 32px)' }}>
                 Secure Your Spot
               </h3>
@@ -206,11 +202,17 @@ export default function CTASection() {
           font-size: 14px;
           position: relative;
           overflow: hidden;
-          box-shadow: 0 0 24px rgba(31,178,254,0.2);
+          box-shadow: 0 0 24px rgba(255, 255, 255, 0.2);
           transition: all 0.25s ease;
+          color: var(--black) !important;
+        }
+        .cta-section__submit::before {
+          transform: none !important;
+          border-radius: var(--radius-btn) !important;
+          background: var(--white) !important;
         }
         .cta-section__submit:hover {
-          box-shadow: 0 0 40px rgba(31,178,254,0.5);
+          box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
           transform: translateY(-2px);
         }
         .cta-section__disclaimer {

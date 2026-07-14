@@ -404,23 +404,27 @@ export default function FacilityCards() {
           margin: 0;
         }
 
-        /* ── Mobile fallback ── */
+        /* ── Mobile layout ── */
         @media (max-width: 900px) {
-          .fc__scroll-zone { height: auto; }
-          .fc__sticky { position: relative; height: auto; }
           .fc__layout {
             grid-template-columns: 1fr;
-            height: auto;
-            padding: 0 20px;
-            gap: 24px;
+            padding: 0 16px;
+            align-items: center;
           }
           .fc__nav { display: none; }
-          .fc__sentinels { display: none; }
-          .fc__panel { height: 260px; }
-          .fc__img { opacity: 0; }
-          .fc__img:first-child { opacity: 1; }
-          .fc__text { position: relative; opacity: 1; transform: none; padding: 16px 0; }
-          .fc__text:not(:first-child) { display: none; }
+          .fc__panel { 
+            height: 65vh; 
+            max-height: 500px;
+          }
+          .fc__text { 
+            padding: 24px 20px; 
+          }
+          .fc__text h3 {
+            font-size: 24px;
+          }
+          .fc__text p {
+            font-size: 14px;
+          }
         }
       `}</style>
     </section>

@@ -3,11 +3,12 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Programs', href: '/programs' },
-  { label: 'Facilities', href: '/facility' },
+  { label: 'Facility', href: '/facility' },
   { label: 'Community', href: '/#community' },
   { label: 'Contact', href: '/contact' },
 ]
@@ -15,6 +16,7 @@ const navLinks = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -40,16 +42,31 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="header__nav" aria-label="Main navigation">
-            {navLinks.map((link) => (
-              <Link key={link.label} href={link.href} className="header__nav-link">
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = link.href === '/' ? pathname === '/' : (!link.href.includes('#') && pathname?.startsWith(link.href))
+              return (
+                <Link 
+                  key={link.label} 
+                  href={link.href} 
+                  passHref 
+                  legacyBehavior
+                >
+                  <a
+                    className="header__nav-link"
+                    data-active={isActive ? 'true' : 'false'}
+                  >
+                    {link.label}
+                  </a>
+                </Link>
+              )
+            })}
           </nav>
 
           {/* CTA */}
-          <Link href="/#waitlist" className="btn-primary header__cta">
-            Join Nexora
+          <Link href="/#waitlist" passHref legacyBehavior>
+            <a className="btn-primary header__cta">
+              Join Nexora
+            </a>
           </Link>
 
           {/* Hamburger */}
@@ -115,46 +132,58 @@ export default function Header() {
           gap: 32px;
         }
         .header__nav-link {
-          font-family: var(--font-display);
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: rgba(240, 240, 240, 0.70);
+          font-size: 15px;
+          font-weight: 500;
+          color: rgba(240, 240, 240, 0.4);
           text-decoration: none;
           position: relative;
-          padding: 2px 0;
+          padding: 6px 0;
           transition: all 0.25s ease;
         }
-        .header__nav-link:hover {
-          color: var(--cyan);
-          text-shadow: 0 0 20px rgba(31, 178, 254, 0.8);
+        .header__nav-link:hover, 
+        .header__nav-link[data-active="true"] {
+          color: var(--white);
         }
         .header__nav-link::after {
           content: '';
           position: absolute;
-          bottom: -2px;
+          bottom: 0;
           left: 0;
           width: 0;
-          height: 1px;
+          height: 2px;
           background: var(--cyan);
           box-shadow: 0 0 8px rgba(31, 178, 254, 0.8);
           transition: width 0.25s ease;
         }
-        .header__nav-link:hover::after { width: 100%; }
+        .header__nav-link:hover::after, 
+        .header__nav-link[data-active="true"]::after { 
+          width: 100%; 
+        }
 
         /* CTA neon glow effect */
         .header__cta {
           display: none;
-          font-size: 11px;
-          padding: 6px 16px;
+          font-family: var(--font-display);
+          font-weight: 700;
+          font-size: 13px;
+          padding: 12px 28px;
           letter-spacing: 0.16em;
-          gap: 6px;
-          box-shadow: 0 0 16px rgba(31, 178, 254, 0.25);
+          text-transform: uppercase;
+          background: transparent !important;
+          border: 2px solid var(--cyan) !important;
+          color: var(--white) !important;
+          border-radius: 2px;
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 16px rgba(255, 255, 255, 0.4) !important;
+          box-shadow: 0 0 16px rgba(31, 178, 254, 0.6), inset 0 0 12px rgba(31, 178, 254, 0.6) !important;
           transition: all 0.25s ease;
         }
+        .header__cta::before {
+          display: none !important;
+        }
         .header__cta:hover {
-          box-shadow: 0 0 32px rgba(31, 178, 254, 0.7), 0 0 60px rgba(31, 178, 254, 0.2);
+          background: rgba(31, 178, 254, 0.1) !important;
+          text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 24px rgba(255, 255, 255, 0.7) !important;
+          box-shadow: 0 0 32px rgba(31, 178, 254, 0.8), inset 0 0 20px rgba(31, 178, 254, 0.8) !important;
           transform: translateY(-2px);
         }
 

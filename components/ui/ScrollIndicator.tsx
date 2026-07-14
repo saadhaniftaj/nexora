@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 const SECTIONS = [
-  { id: 'hero', label: 'Hero' },
+  { id: 'hero', label: 'Home' },
   { id: 'essence', label: 'Essence' },
   { id: 'programs', label: 'Programs' },
   { id: 'community', label: 'Community' },
@@ -12,15 +13,12 @@ const SECTIONS = [
 
 export default function ScrollIndicator() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const pulseRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
-      setScrollProgress(docHeight > 0 ? scrollTop / docHeight : 0)
+    if (pathname !== '/') return
 
+    const handleScroll = () => {
       // Find active section
       const sectionEls = SECTIONS.map((s) => document.getElementById(s.id))
       let current = 0
@@ -35,7 +33,9 @@ export default function ScrollIndicator() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [pathname])
+
+  if (pathname !== '/') return null
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -43,21 +43,6 @@ export default function ScrollIndicator() {
 
   return (
     <div className="scroll-indicator" aria-hidden="true">
-      {/* Track line */}
-      <div className="scroll-indicator__track">
-        {/* Running neon pulse */}
-        <div
-          ref={pulseRef}
-          className="scroll-indicator__pulse"
-          style={{ top: `${scrollProgress * 100}%` }}
-        />
-        {/* Filled progress */}
-        <div
-          className="scroll-indicator__fill"
-          style={{ height: `${scrollProgress * 100}%` }}
-        />
-      </div>
-
       {/* Section dots */}
       <div className="scroll-indicator__dots">
         {SECTIONS.map((section, i) => (
@@ -84,42 +69,6 @@ export default function ScrollIndicator() {
           align-items: center;
           gap: 12px;
           pointer-events: none;
-        }
-        .scroll-indicator__track {
-          position: relative;
-          width: 2px;
-          height: 160px;
-          background: rgba(255, 255, 255, 0.07);
-          border-radius: 2px;
-          overflow: visible;
-        }
-        .scroll-indicator__fill {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          background: linear-gradient(to bottom, var(--cyan), var(--cyan-light));
-          border-radius: 2px;
-          transition: height 0.1s ease;
-          box-shadow: 0 0 8px rgba(31, 178, 254, 0.6);
-        }
-        .scroll-indicator__pulse {
-          position: absolute;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 8px;
-          height: 8px;
-          background: var(--cyan-light);
-          border-radius: 50%;
-          box-shadow:
-            0 0 6px 2px rgba(90, 240, 250, 0.9),
-            0 0 16px 4px rgba(31, 178, 254, 0.5);
-          transition: top 0.15s ease;
-          animation: pulseGlow 1.4s ease-in-out infinite;
-        }
-        @keyframes pulseGlow {
-          0%, 100% { opacity: 1; box-shadow: 0 0 6px 2px rgba(90,240,250,0.9), 0 0 16px 4px rgba(31,178,254,0.5); }
-          50% { opacity: 0.6; box-shadow: 0 0 12px 4px rgba(90,240,250,0.9), 0 0 28px 8px rgba(31,178,254,0.5); }
         }
         .scroll-indicator__dots {
           display: flex;
