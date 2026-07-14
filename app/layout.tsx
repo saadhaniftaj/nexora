@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: '%s | Nexora Fitness',
   },
   description:
-    'Nexora Fitness is a premium training facility opening at River Market, Downtown New Westminster, BC. 5,000 sq ft of curated equipment — Atlantis, Core Health & Wellness, Shua, Xmaster, Torque, Bootybuilder — Fraser River views, private washrooms, on-site physio, cold plunge & sauna. Join the founding member waitlist.',
+    'Nexora Fitness is a premium training facility opening at River Market, Downtown New Westminster, BC. 5,000 sq ft of curated equipment — Atlantis, Core Health & Wellness, Shua, Xmaster, Torque, Bootybuilder — Fraser River views, private washrooms, on-site physio. Join the founding member waitlist.',
   keywords: [
     'premium gym New Westminster',
     'downtown New Westminster gym',
@@ -24,7 +24,6 @@ export const metadata: Metadata = {
     'Bootybuilder gym New Westminster',
     'private washroom gym BC',
     'physio gym New Westminster',
-    'cold plunge sauna New Westminster',
     'strength training New Westminster',
     'premium fitness facility BC',
     'gym near SkyTrain New Westminster',
@@ -83,7 +82,7 @@ const jsonLd = {
   '@type': 'HealthClub',
   name: 'Nexora Fitness',
   description:
-    'Premium fitness facility at River Market, Downtown New Westminster, BC. Curated equipment, Fraser River views, private washrooms, physio, cold plunge & sauna.',
+    'Premium fitness facility at River Market, Downtown New Westminster, BC. Curated equipment, Fraser River views, private washrooms, physio.',
   url: 'https://nexorafitness.ca',
   logo: 'https://nexorafitness.ca/logos/nexora-wordmark.png',
   image: 'https://nexorafitness.ca/images/hero/hero-home.png',
@@ -120,8 +119,6 @@ const jsonLd = {
     { '@type': 'LocationFeatureSpecification', name: 'Private Washrooms', value: true },
     { '@type': 'LocationFeatureSpecification', name: 'Fraser River View', value: true },
     { '@type': 'LocationFeatureSpecification', name: 'On-site Physio', value: true },
-    { '@type': 'LocationFeatureSpecification', name: 'Cold Plunge', value: true },
-    { '@type': 'LocationFeatureSpecification', name: 'Sauna', value: true },
     { '@type': 'LocationFeatureSpecification', name: 'InBody Assessment', value: true },
     { '@type': 'LocationFeatureSpecification', name: 'Personal Training', value: true },
   ],

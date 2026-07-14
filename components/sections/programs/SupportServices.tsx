@@ -33,12 +33,6 @@ const services = [
     body: 'When movement, pain, or recovery needs more attention — on-site registered physiotherapists and massage therapists are here.',
     tag: null,
   },
-  {
-    icon: Snowflake,
-    title: 'Cold Plunge & Sauna',
-    body: 'True progress doesn\'t end when your workout does. Recovery infrastructure is built into the Nexora experience.',
-    tag: 'Coming Soon',
-  },
 ]
 
 export default function SupportServices() {

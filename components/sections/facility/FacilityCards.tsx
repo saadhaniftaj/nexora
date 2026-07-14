@@ -39,13 +39,6 @@ const cards = [
     body: 'On-site physiotherapy, massage therapy, active rehab, and RMT. Expert support woven directly into your training journey.',
     img: '/images/sections/card-rehab.png',
   },
-  {
-    id: 6,
-    number: '06',
-    title: 'Cold Plunge & Sauna',
-    body: 'Our recovery suite includes a cold plunge and infrared sauna — because the best athletes know that serious training demands serious recovery.',
-    img: '/images/sections/card-recovery.png',
-  },
 ]
 
 const NAV_ROW_H = 64   // px — height of each nav button row
