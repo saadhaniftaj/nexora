@@ -1,6 +1,7 @@
 'use client'
 
-import { UserPlus, LineChart, ShieldCheck, Dumbbell, Stethoscope, Snowflake } from 'lucide-react'
+import { useRef } from 'react'
+import { UserPlus, LineChart, ShieldCheck, Dumbbell, Stethoscope, ChevronRight, ChevronLeft } from 'lucide-react'
 
 const services = [
   {
@@ -36,45 +37,102 @@ const services = [
 ]
 
 export default function SupportServices() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 400
+      scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' })
+    }
+  }
+
   return (
     <section className="support section" aria-labelledby="support-heading">
       <div className="container">
         <span className="section-label">Support That Moves With You</span>
         <h2 id="support-heading">
           A better program starts with<br />
-          <span className="text-cyan">better guidance.</span>
+          <span className="text-cyan">better guidance</span>
         </h2>
         <p className="support__intro">
           World-class equipment is the foundation. Expert support is what makes the difference.
         </p>
 
-        <div className="support__grid">
-          {services.map((svc) => {
-            const Icon = svc.icon
-            return (
-              <article key={svc.title} className="support-card">
-                {svc.tag && <span className="support-card__tag">{svc.tag}</span>}
-                <div className="support-card__icon">
-                  <Icon size={22} strokeWidth={1.5} />
-                </div>
-                <h3 className="support-card__title">{svc.title}</h3>
-                <p className="support-card__body">{svc.body}</p>
-                <div className="support-card__bar" />
-              </article>
-            )
-          })}
+        <div className="support__carousel-wrapper">
+          <button className="slider-arrow slider-arrow--left" onClick={() => scroll('left')} aria-label="Scroll left">
+            <ChevronLeft size={36} strokeWidth={1} />
+          </button>
+          
+          <div className="support__grid" ref={scrollRef}>
+            {services.map((svc) => {
+              const Icon = svc.icon
+              return (
+                <article key={svc.title} className="support-card">
+                  {svc.tag && <span className="support-card__tag">{svc.tag}</span>}
+                  <div className="support-card__icon">
+                    <Icon size={22} strokeWidth={1.5} />
+                  </div>
+                  <h3 className="support-card__title">{svc.title}</h3>
+                  <p className="support-card__body">{svc.body}</p>
+                  <div className="support-card__bar" />
+                </article>
+              )
+            })}
+          </div>
+
+          <button className="slider-arrow slider-arrow--right" onClick={() => scroll('right')} aria-label="Scroll right">
+            <ChevronRight size={36} strokeWidth={1} />
+          </button>
         </div>
       </div>
 
       <style jsx>{`
         .support h2 { margin: 8px 0 16px; }
         .support__intro { max-width: 480px; margin-bottom: 52px; }
-        .support__grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
+
+        .support__carousel-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 24px;
         }
+
+        .slider-arrow {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: transparent;
+          border: none;
+          color: rgba(31, 178, 254, 0.4);
+          cursor: pointer;
+          transition: all 0.3s ease;
+          flex-shrink: 0;
+          z-index: 10;
+          padding: 8px;
+        }
+        .slider-arrow:hover {
+          color: var(--cyan);
+          transform: scale(1.15);
+          filter: drop-shadow(0 0 12px var(--cyan)) drop-shadow(0 0 24px rgba(31,178,254,0.6));
+        }
+
+        .support__grid {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          gap: 20px;
+          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none; /* IE */
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 20px;
+        }
+        .support__grid::-webkit-scrollbar { 
+          display: none; 
+        }
+
         .support-card {
+          flex: 0 0 350px; /* Fixed width for slider cards */
+          scroll-snap-align: start;
           position: relative;
           padding: 32px 26px 36px;
           background: var(--surface);
@@ -138,21 +196,16 @@ export default function SupportServices() {
         .support-card:hover .support-card__bar { transform: scaleX(1); }
 
         @media (max-width: 900px) {
-          .support__grid {
-            display: flex;
-            justify-content: flex-start;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 16px;
-            padding: 0 20px 40px;
+          .slider-arrow { display: none; }
+          .support__carousel-wrapper {
             margin: 0 -20px;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
           }
-          .support__grid::-webkit-scrollbar { display: none; }
+          .support__grid {
+            padding: 0 20px 40px;
+            gap: 16px;
+          }
           .support-card {
             flex: 0 0 85%;
-            max-width: 85%;
             scroll-snap-align: center;
           }
         }

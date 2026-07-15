@@ -74,7 +74,7 @@ export default function FacilityCards() {
         <span className="section-label">Every Detail</span>
         <h2 id="fc-heading">
           Designed With<br />
-          <span className="text-cyan">Purpose.</span>
+          <span className="text-cyan">Purpose</span>
         </h2>
       </div>
 

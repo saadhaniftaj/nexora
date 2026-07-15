@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef } from 'react'
 import Image from 'next/image'
-import { ArrowRight, ArrowLeft } from 'lucide-react'
+import { ChevronRight, ChevronLeft } from 'lucide-react'
 
 const cards = [
   {
@@ -48,9 +48,14 @@ const cards = [
 ]
 
 export default function EssenceCards() {
-  const pages = [cards.slice(0, 3), cards.slice(3, 6)]
-  const [page, setPage] = useState(0)
-  const visible = pages[page]
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 400
+      scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' })
+    }
+  }
 
   return (
     <section id="essence" className="essence section" aria-labelledby="essence-heading">
@@ -68,37 +73,12 @@ export default function EssenceCards() {
         </p>
 
         <div className="essence__content-wrapper">
-          <button
-            className="essence__side-arrow"
-            onClick={() => setPage((p) => Math.max(0, p - 1))}
-            disabled={page === 0}
-            aria-label="Previous cards"
-          >
-            <ArrowLeft size={24} />
+          <button className="essence__side-arrow" onClick={() => scroll('left')} aria-label="Scroll left">
+            <ChevronLeft size={36} strokeWidth={1} />
           </button>
 
           <div className="essence__grid-container">
-            {/* Desktop View */}
-            <div className="essence__grid essence__grid--desktop">
-              {visible.map((card) => (
-                <article key={card.id} className="essence__card">
-                  <div className="essence__card-img">
-                    <Image src={card.img} alt={card.title} fill sizes="400px" style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }} />
-                    <div className="essence__card-img-overlay" />
-                  </div>
-                  <div className="essence__card-body">
-                    <span className="essence__card-eyebrow">{card.eyebrow}</span>
-                    <h3 className="essence__card-title">{card.title}</h3>
-                    <p className="essence__card-sub">{card.sub}</p>
-                    <p className="essence__card-body-text">{card.body}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-            <div className="essence__grid-bar essence__grid-bar--desktop" style={{ '--card-count': visible.length } as any} />
-
-            {/* Mobile View */}
-            <div className="essence__grid essence__grid--mobile">
+            <div className="essence__grid" ref={scrollRef}>
               {cards.map((card) => (
                 <article key={card.id} className="essence__card">
                   <div className="essence__card-img">
@@ -116,13 +96,8 @@ export default function EssenceCards() {
             </div>
           </div>
           
-          <button
-            className="essence__side-arrow"
-            onClick={() => setPage((p) => Math.min(pages.length - 1, p + 1))}
-            disabled={page === pages.length - 1}
-            aria-label="Next cards"
-          >
-            <ArrowRight size={24} />
+          <button className="essence__side-arrow" onClick={() => scroll('right')} aria-label="Scroll right">
+            <ChevronRight size={36} strokeWidth={1} />
           </button>
         </div>
       </div>
@@ -162,27 +137,40 @@ export default function EssenceCards() {
         .essence__grid-container {
           flex: 1;
           position: relative;
+          overflow: hidden;
+          margin: 0 -10px; /* offset padding */
+          padding: 10px; /* space for shadows */
         }
 
         .essence__grid {
           display: flex;
-          justify-content: center;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
           gap: 0;
+          scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 20px;
         }
-        .essence__grid--mobile {
-          display: none;
+        .essence__grid::-webkit-scrollbar { 
+          display: none; 
         }
 
         .essence__card {
-          flex: 1 1 33.333%;
-          max-width: 33.333%;
+          flex: 0 0 350px;
+          scroll-snap-align: start;
           position: relative;
           background: var(--surface);
-          border-radius: var(--radius-card);
+          border-radius: 0;
           overflow: hidden;
           border: 1px solid rgba(255,255,255,0.05);
+          border-right: none;
+          border-bottom: 2px solid var(--cyan);
+          box-shadow: 0 4px 16px rgba(31, 178, 254, 0.2);
           transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
           cursor: default;
+        }
+        .essence__card:last-child {
+          border-right: 1px solid rgba(255,255,255,0.05);
         }
         .essence__card:hover {
           transform: scale(1.03) translateY(-4px);
@@ -240,38 +228,22 @@ export default function EssenceCards() {
           margin: 10px 0 0 0;
         }
 
-        .essence__grid-bar {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          margin: 0 auto;
-          width: calc(var(--card-count, 3) * 33.333%);
-          height: 3px;
-          background: var(--cyan);
-          box-shadow: 0 0 16px rgba(31,178,254,0.6);
-          opacity: 1;
-          pointer-events: none;
-          z-index: 10;
-        }
-
         .essence__side-arrow {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 48px;
-          height: 48px;
-          border: none;
           background: transparent;
-          color: rgba(255, 255, 255, 0.4);
+          border: none;
+          color: rgba(31, 178, 254, 0.4);
           cursor: pointer;
           transition: all 0.3s ease;
           flex-shrink: 0;
+          padding: 8px;
         }
         .essence__side-arrow:hover {
           color: var(--cyan);
-          transform: scale(1.1);
-          filter: drop-shadow(0 0 12px rgba(31, 178, 254, 0.6));
+          transform: scale(1.15);
+          filter: drop-shadow(0 0 12px var(--cyan)) drop-shadow(0 0 24px rgba(31,178,254,0.6));
         }
         .essence__side-arrow:disabled {
           opacity: 0.1;
@@ -282,31 +254,19 @@ export default function EssenceCards() {
         @media (max-width: 900px) { 
           .essence__content-wrapper { display: block; }
           .essence__side-arrow { display: none; }
-          .essence__grid--desktop { display: none; }
-          .essence__grid-bar--desktop { display: none; }
 
           .essence__grid-container {
             margin: 0 -20px; /* Bleed to edges on mobile */
+            padding: 0;
           }
 
-          .essence__grid--mobile {
-            display: flex;
-            justify-content: flex-start;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 16px;
+          .essence__grid {
             padding: 0 20px 40px; /* Padding for scroll shadow & edges */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE */
-            -webkit-overflow-scrolling: touch;
-          }
-          .essence__grid--mobile::-webkit-scrollbar { 
-            display: none; 
+            gap: 0;
           }
           
-          .essence__grid--mobile .essence__card { 
+          .essence__card { 
             flex: 0 0 85%; 
-            max-width: 85%; 
             scroll-snap-align: center;
           }
         }

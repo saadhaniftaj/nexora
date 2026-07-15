@@ -9,7 +9,7 @@ export default function NexoraStandard() {
             <span className="section-label">The Nexora Standard</span>
             <h2 id="standard-heading">
               Every detail<br />
-              <span className="text-cyan">has a purpose.</span>
+              <span className="text-cyan">has a purpose</span>
             </h2>
           </div>
           <div className="standard__right">
