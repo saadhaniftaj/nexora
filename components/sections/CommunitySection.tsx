@@ -32,10 +32,6 @@ export default function CommunitySection() {
             sizes="(max-width: 900px) 100vw, 60vw"
             style={{ objectFit: 'cover' }}
           />
-          {/* Video play button overlay */}
-          <button className="community__play" aria-label="Play community video">
-            <span className="community__play-icon">▶</span>
-          </button>
         </div>
       </div>
 
@@ -109,33 +105,6 @@ export default function CommunitySection() {
           clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
           margin-left: -5%;
         }
-        .community__play {
-          position: absolute;
-          bottom: 35%;
-          left: 25%;
-          transform: translate(-50%, -50%);
-          z-index: 3;
-          width: 64px;
-          height: 64px;
-          border-radius: 50%;
-          background: rgba(8,8,8,0.7);
-          border: 1px solid rgba(31,178,254,0.4);
-          color: var(--cyan);
-          font-size: 20px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.25s ease;
-          backdrop-filter: blur(8px);
-        }
-        .community__play:hover {
-          background: rgba(31,178,254,0.15);
-          border-color: var(--cyan);
-          box-shadow: 0 0 30px rgba(31,178,254,0.4);
-          transform: translate(-50%, -50%) scale(1.08);
-        }
-        .community__play-icon { margin-left: 4px; }
 
         @media (max-width: 1024px) {
           .community__text-inner { margin-right: 0; }
@@ -145,7 +114,6 @@ export default function CommunitySection() {
           .community__content { flex: none; justify-content: center; padding: 60px 24px; }
           .community__text-inner { margin: 0 auto; text-align: center; }
           .community__img-wrap { height: 400px; clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%); margin-left: 0; }
-          .community__play { left: 50%; bottom: 50%; }
         }
       `}</style>
     </section>
