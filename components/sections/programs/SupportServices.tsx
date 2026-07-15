@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { UserPlus, LineChart, ShieldCheck, Dumbbell, Stethoscope, ChevronRight, ChevronLeft } from 'lucide-react'
 
 const services = [
@@ -36,13 +36,37 @@ const services = [
   },
 ]
 
+const extendedServices = [...services, ...services, ...services, ...services].map((s, i) => ({ ...s, uniqueId: i }))
+
 export default function SupportServices() {
   const scrollRef = useRef<HTMLDivElement>(null)
+
+  // Initialize at the second set so user can scroll left immediately
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ left: scrollRef.current.scrollWidth / 4, behavior: 'auto' })
+    }
+  }, [])
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return
+    const { scrollLeft, scrollWidth } = scrollRef.current
+    const singleSetWidth = scrollWidth / 4
+
+    // If we've scrolled into the 4th set, silently jump back to the 3rd set
+    if (scrollLeft >= singleSetWidth * 3) {
+      scrollRef.current.scrollTo({ left: scrollLeft - singleSetWidth, behavior: 'auto' })
+    } 
+    // If we've scrolled into the 1st half of the 1st set, silently jump forward
+    else if (scrollLeft <= singleSetWidth * 0.5) {
+      scrollRef.current.scrollTo({ left: scrollLeft + singleSetWidth, behavior: 'auto' })
+    }
+  }
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const scrollAmount = 400
-      scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' })
+      scrollRef.current.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' })
     }
   }
 
@@ -63,17 +87,17 @@ export default function SupportServices() {
             <ChevronLeft size={36} strokeWidth={1} />
           </button>
           
-          <div className="support__grid" ref={scrollRef}>
-            {services.map((svc) => {
-              const Icon = svc.icon
+          <div className="support__grid" ref={scrollRef} onScroll={handleScroll}>
+            {extendedServices.map((service) => {
+              const Icon = service.icon
               return (
-                <article key={svc.title} className="support-card">
-                  {svc.tag && <span className="support-card__tag">{svc.tag}</span>}
+                <article key={service.uniqueId} className="support-card">
+                  {service.tag && <span className="support-card__tag">{service.tag}</span>}
                   <div className="support-card__icon">
                     <Icon size={22} strokeWidth={1.5} />
                   </div>
-                  <h3 className="support-card__title">{svc.title}</h3>
-                  <p className="support-card__body">{svc.body}</p>
+                  <h3 className="support-card__title">{service.title}</h3>
+                  <p className="support-card__body">{service.body}</p>
                   <div className="support-card__bar" />
                 </article>
               )

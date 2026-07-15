@@ -41,7 +41,7 @@ const cards = [
   },
 ]
 
-const NAV_ROW_H = 64   // px — height of each nav button row
+const NAV_ROW_H = 56   // px — height of each nav button row
 const SLIDE_VH  = 180  // viewport-heights each card gets to scroll through
 
 export default function FacilityCards() {
@@ -73,8 +73,7 @@ export default function FacilityCards() {
       <div className="container fc__header">
         <span className="section-label">Every Detail</span>
         <h2 id="fc-heading">
-          Designed With<br />
-          <span className="text-cyan">Purpose</span>
+          Designed With <span className="text-cyan">Purpose</span>
         </h2>
       </div>
 
@@ -174,8 +173,8 @@ export default function FacilityCards() {
 
       <style jsx>{`
         /* ── Section header ── */
-        .facility-cards { padding: 80px 0 0; }
-        .fc__header { padding-bottom: 56px; }
+        .facility-cards { padding: 40px 0 0; }
+        .fc__header { padding-bottom: 16px; }
         .fc__header h2 { margin: 8px 0 0; }
 
         /* ── Scroll zone: total height = 6 × 100vh ── */
@@ -209,8 +208,9 @@ export default function FacilityCards() {
         .fc__layout {
           display: grid;
           grid-template-columns: 260px 1fr;
-          gap: 48px;
+          gap: 32px;
           height: 100%;
+          margin-top: -80px;
           align-items: center;          /* vertically centers both columns */
           padding: 0 max(32px, calc((100vw - 1200px) / 2));
         }
@@ -411,6 +411,7 @@ export default function FacilityCards() {
             grid-template-columns: 1fr;
             padding: 0 16px;
             align-items: center;
+            margin-top: 0;
           }
           .fc__nav { display: none; }
           .fc__panel { 

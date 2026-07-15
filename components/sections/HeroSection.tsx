@@ -50,8 +50,8 @@ export default function HeroSection() {
               <span className="hero__line" style={{ fontSize: '0.8em' }}><span className="text-glow-white">FUELS YOU</span></span>
               <span className="hero__line" style={{ fontSize: '0.8em' }}><span className="text-cyan text-glow-cyan">PROGRESS</span></span>
               <span className="hero__line" style={{ fontSize: '0.8em' }}><span className="text-glow-white">SHAPES YOU</span></span>
-              <span className="hero__line">"<img src="/logos/nexora_text_logo_3.png" alt="NEXORA" className="hero__nexora-logo" /></span>
-              <span className="hero__line"><span className="text-glow-white">TRANSFORMS YOU"</span></span>
+              <span className="hero__line"><img src="/logos/nexora_text_logo_3.png" alt="NEXORA" className="hero__nexora-logo" /></span>
+              <span className="hero__line"><span className="text-glow-white">TRANSFORMS YOU</span></span>
             </h1>
           </div>
 

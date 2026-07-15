@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { ChevronRight, ChevronLeft } from 'lucide-react'
 
@@ -47,13 +47,37 @@ const cards = [
   },
 ]
 
+const extendedCards = [...cards, ...cards, ...cards, ...cards].map((c, i) => ({ ...c, uniqueId: i }))
+
 export default function EssenceCards() {
   const scrollRef = useRef<HTMLDivElement>(null)
+
+  // Initialize at the second set so user can scroll left immediately
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ left: scrollRef.current.scrollWidth / 4, behavior: 'auto' })
+    }
+  }, [])
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return
+    const { scrollLeft, scrollWidth } = scrollRef.current
+    const singleSetWidth = scrollWidth / 4
+
+    // If we've scrolled into the 4th set, silently jump back to the 3rd set
+    if (scrollLeft >= singleSetWidth * 3) {
+      scrollRef.current.scrollTo({ left: scrollLeft - singleSetWidth, behavior: 'auto' })
+    } 
+    // If we've scrolled into the 1st half of the 1st set, silently jump forward
+    else if (scrollLeft <= singleSetWidth * 0.5) {
+      scrollRef.current.scrollTo({ left: scrollLeft + singleSetWidth, behavior: 'auto' })
+    }
+  }
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const scrollAmount = 400
-      scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' })
+      scrollRef.current.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' })
     }
   }
 
@@ -78,9 +102,9 @@ export default function EssenceCards() {
           </button>
 
           <div className="essence__grid-container">
-            <div className="essence__grid" ref={scrollRef}>
-              {cards.map((card) => (
-                <article key={card.id} className="essence__card">
+            <div className="essence__grid" ref={scrollRef} onScroll={handleScroll}>
+              {extendedCards.map((card) => (
+                <article key={card.uniqueId} className="essence__card">
                   <div className="essence__card-img">
                     <Image src={card.img} alt={card.title} fill sizes="400px" style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }} />
                     <div className="essence__card-img-overlay" />

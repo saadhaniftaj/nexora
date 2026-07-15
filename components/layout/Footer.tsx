@@ -40,18 +40,19 @@ export default function Footer() {
           <h4 className="footer__heading">Contact</h4>
           <address className="footer__address">
             <a 
-              href="https://www.google.com/maps/search/?api=1&query=River+Market+at+Westminster+Quay,+New+Westminster,+BC+V3M+6G5" 
+              href="https://www.google.com/maps/search/?api=1&query=Unit+218,+810+Quayside+Dr,+New+Westminster,+BC+V3M+6B9" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="footer__link footer__link--address"
             >
               <MapPin size={16} className="footer__map-icon" />
               <span>
-                River Market at Westminster Quay<br />
-                New Westminster, BC V3M 6G5
+                At River Market<br />
+                Unit - 218, 810 Quayside Dr,<br />
+                New Westminster BC V3M 6B9
               </span>
             </a>
-            <a href="tel:+16041234567" className="footer__link">604-123-4567</a>
+            <a href="tel:+12368657524" className="footer__link">+1 236-865-7524</a>
             <Link href="/contact" className="footer__link">Leave a Message</Link>
             <a href="mailto:info@nexorafitness.ca" className="footer__link">info@nexorafitness.ca</a>
             <p className="footer__hours">24/7</p>

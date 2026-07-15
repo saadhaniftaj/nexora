@@ -126,10 +126,10 @@ export default function ContactPage() {
 
       <div className="contact-map container">
         <h2 className="contact-map__title">Our Location</h2>
-        <p className="contact-map__subtitle">River Market at Westminster Quay, New Westminster, BC</p>
+        <p className="contact-map__subtitle">At River Market, Unit - 218, 810 Quayside Dr, New Westminster, BC</p>
         <div className="contact-map__iframe-wrap">
           <iframe 
-            src="https://maps.google.com/maps?q=River%20Market%20at%20Westminster%20Quay,%20New%20Westminster,%20BC%20V3M%206G5&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+            src="https://maps.google.com/maps?q=Unit%20218,%20810%20Quayside%20Dr,%20New%20Westminster,%20BC%20V3M%206B9&t=&z=14&ie=UTF8&iwloc=&output=embed" 
             style={{ border: 0 }} 
             allowFullScreen 
             loading="lazy" 
