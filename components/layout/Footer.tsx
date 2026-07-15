@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Instagram, Facebook, Youtube } from 'lucide-react'
+import { Instagram, Facebook, Youtube, MapPin } from 'lucide-react'
 
 
 export default function Footer() {
@@ -39,8 +39,18 @@ export default function Footer() {
         <div className="footer__col">
           <h4 className="footer__heading">Contact</h4>
           <address className="footer__address">
-            <p>River Market at Westminster Quay</p>
-            <p>New Westminster, BC V3M 6G5</p>
+            <a 
+              href="https://www.google.com/maps/search/?api=1&query=River+Market+at+Westminster+Quay,+New+Westminster,+BC+V3M+6G5" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="footer__link footer__link--address"
+            >
+              <MapPin size={16} className="footer__map-icon" />
+              <span>
+                River Market at Westminster Quay<br />
+                New Westminster, BC V3M 6G5
+              </span>
+            </a>
             <a href="tel:+16041234567" className="footer__link">604-123-4567</a>
             <Link href="/contact" className="footer__link">Leave a Message</Link>
             <a href="mailto:info@nexorafitness.ca" className="footer__link">info@nexorafitness.ca</a>
@@ -99,7 +109,22 @@ export default function Footer() {
           font-style: normal;
         }
         .footer__link:hover { color: var(--cyan); }
-
+        .footer__link--address {
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+          text-shadow: 0 0 12px rgba(31, 178, 254, 0.4);
+          transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        .footer__link--address:hover {
+          color: var(--cyan);
+          text-shadow: 0 0 20px rgba(31, 178, 254, 0.9);
+        }
+        .footer__link--address :global(.footer__map-icon) {
+          flex-shrink: 0;
+          margin-top: 2px;
+          color: var(--cyan);
+        }
         /* Social icons — under Quick Links per client spec */
         .footer__social {
           display: flex;

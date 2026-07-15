@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ArrowLeft } from 'lucide-react'
 
 const cards = [
   {
@@ -61,15 +61,25 @@ export default function EssenceCards() {
       <div className="container">
         <span className="section-label">Nexora Essence</span>
         <h2 id="essence-heading">
-          The gym New Westminster deserved.
+          The gym New Westminster deserved
         </h2>
         <p className="essence__intro">
           Nexora isn't an upgrade to what's already here — it's what's been missing. A facility built around real training, real recovery, and a location that nothing else in the city can match.
         </p>
 
         <div className="essence__content-wrapper">
+          <button
+            className="essence__side-arrow"
+            onClick={() => setPage((p) => Math.max(0, p - 1))}
+            disabled={page === 0}
+            aria-label="Previous cards"
+          >
+            <ArrowLeft size={24} />
+          </button>
+
           <div className="essence__grid-container">
-            <div className="essence__grid">
+            {/* Desktop View */}
+            <div className="essence__grid essence__grid--desktop">
               {visible.map((card) => (
                 <article key={card.id} className="essence__card">
                   <div className="essence__card-img">
@@ -85,12 +95,31 @@ export default function EssenceCards() {
                 </article>
               ))}
             </div>
-            <div className="essence__grid-bar" />
+            <div className="essence__grid-bar essence__grid-bar--desktop" style={{ '--card-count': visible.length } as any} />
+
+            {/* Mobile View */}
+            <div className="essence__grid essence__grid--mobile">
+              {cards.map((card) => (
+                <article key={card.id} className="essence__card">
+                  <div className="essence__card-img">
+                    <Image src={card.img} alt={card.title} fill sizes="400px" style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }} />
+                    <div className="essence__card-img-overlay" />
+                  </div>
+                  <div className="essence__card-body">
+                    <span className="essence__card-eyebrow">{card.eyebrow}</span>
+                    <h3 className="essence__card-title">{card.title}</h3>
+                    <p className="essence__card-sub">{card.sub}</p>
+                    <p className="essence__card-body-text">{card.body}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
           
           <button
             className="essence__side-arrow"
-            onClick={() => setPage((p) => (p === 0 ? 1 : 0))}
+            onClick={() => setPage((p) => Math.min(pages.length - 1, p + 1))}
+            disabled={page === pages.length - 1}
             aria-label="Next cards"
           >
             <ArrowRight size={24} />
@@ -136,12 +165,17 @@ export default function EssenceCards() {
         }
 
         .essence__grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          display: flex;
+          justify-content: center;
           gap: 0;
+        }
+        .essence__grid--mobile {
+          display: none;
         }
 
         .essence__card {
+          flex: 1 1 33.333%;
+          max-width: 33.333%;
           position: relative;
           background: var(--surface);
           border-radius: var(--radius-card);
@@ -155,8 +189,13 @@ export default function EssenceCards() {
           border-color: var(--cyan-border);
           box-shadow: 0 0 40px rgba(31,178,254,0.15);
         }
+        .essence__card :global(img) {
+          filter: brightness(0.5) grayscale(0.6);
+          transition: transform 0.5s ease, filter 0.5s ease !important;
+        }
         .essence__card:hover :global(img) {
           transform: scale(1.06);
+          filter: brightness(1.1) grayscale(0);
         }
         .essence__card-img {
           position: relative;
@@ -176,7 +215,7 @@ export default function EssenceCards() {
         }
         .essence__card-eyebrow {
           font-family: var(--font-display);
-          font-size: 10px;
+          font-size: 12px;
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
@@ -194,7 +233,6 @@ export default function EssenceCards() {
           line-height: 1.5;
           margin: 0;
         }
-        /* Fixed text (no expansion) */
         .essence__card-body-text {
           font-size: 13px;
           color: var(--muted);
@@ -207,6 +245,8 @@ export default function EssenceCards() {
           left: 0;
           right: 0;
           bottom: 0;
+          margin: 0 auto;
+          width: calc(var(--card-count, 3) * 33.333%);
           height: 3px;
           background: var(--cyan);
           box-shadow: 0 0 16px rgba(31,178,254,0.6);
@@ -219,29 +259,57 @@ export default function EssenceCards() {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 50px;
-          height: 50px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          background: rgba(255, 255, 255, 0.03);
-          color: var(--cyan);
-          border-radius: 50%;
+          width: 48px;
+          height: 48px;
+          border: none;
+          background: transparent;
+          color: rgba(255, 255, 255, 0.4);
           cursor: pointer;
-          transition: all 0.25s ease;
+          transition: all 0.3s ease;
           flex-shrink: 0;
         }
         .essence__side-arrow:hover {
-          background: var(--cyan);
-          color: var(--black);
-          border-color: var(--cyan);
-          box-shadow: var(--glow-sm);
+          color: var(--cyan);
+          transform: scale(1.1);
+          filter: drop-shadow(0 0 12px rgba(31, 178, 254, 0.6));
+        }
+        .essence__side-arrow:disabled {
+          opacity: 0.1;
+          cursor: not-allowed;
+          pointer-events: none;
         }
 
         @media (max-width: 900px) { 
-          .essence__content-wrapper { flex-direction: column; align-items: stretch; }
-          .essence__grid { grid-template-columns: repeat(2, 1fr); } 
-          .essence__side-arrow { align-self: flex-end; }
+          .essence__content-wrapper { display: block; }
+          .essence__side-arrow { display: none; }
+          .essence__grid--desktop { display: none; }
+          .essence__grid-bar--desktop { display: none; }
+
+          .essence__grid-container {
+            margin: 0 -20px; /* Bleed to edges on mobile */
+          }
+
+          .essence__grid--mobile {
+            display: flex;
+            justify-content: flex-start;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 16px;
+            padding: 0 20px 40px; /* Padding for scroll shadow & edges */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE */
+            -webkit-overflow-scrolling: touch;
+          }
+          .essence__grid--mobile::-webkit-scrollbar { 
+            display: none; 
+          }
+          
+          .essence__grid--mobile .essence__card { 
+            flex: 0 0 85%; 
+            max-width: 85%; 
+            scroll-snap-align: center;
+          }
         }
-        @media (max-width: 560px) { .essence__grid { grid-template-columns: 1fr; } }
       `}</style>
     </section>
   )

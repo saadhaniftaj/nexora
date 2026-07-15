@@ -30,7 +30,17 @@ export async function POST(req: Request) {
     const sheets = google.sheets({ version: 'v4', auth })
 
     // Prepare the row data: [Timestamp, Name, Email, Phone, Message]
-    const timestamp = new Date().toISOString()
+    const timestamp = new Date().toLocaleString('en-US', {
+      timeZone: 'America/Vancouver',
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+      timeZoneName: 'short'
+    })
     
     // Append the row to the 'Contact' tab
     await sheets.spreadsheets.values.append({

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -37,6 +38,17 @@ export default function ContactPage() {
 
   return (
     <main className="contact-page">
+      <div className="contact-page__bg">
+        <Image 
+          src="/images/sections/contact-bg.png" 
+          alt="Nexora Fitness Reception" 
+          fill 
+          sizes="100vw" 
+          style={{ objectFit: 'cover', objectPosition: 'center' }} 
+        />
+        <div className="contact-page__bg-overlay" />
+      </div>
+
       <div className="contact-hero container">
         <h1 className="contact-title">Leave a Message</h1>
         <p className="contact-subtitle">
@@ -112,15 +124,80 @@ export default function ContactPage() {
         </div>
       </div>
 
+      <div className="contact-map container">
+        <h2 className="contact-map__title">Our Location</h2>
+        <p className="contact-map__subtitle">River Market at Westminster Quay, New Westminster, BC</p>
+        <div className="contact-map__iframe-wrap">
+          <iframe 
+            src="https://maps.google.com/maps?q=River%20Market%20at%20Westminster%20Quay,%20New%20Westminster,%20BC%20V3M%206G5&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+            style={{ border: 0 }} 
+            allowFullScreen 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+      </div>
+
       <style jsx>{`
         .contact-page {
+          position: relative;
           padding-top: 140px;
           padding-bottom: 80px;
           min-height: 100vh;
+          z-index: 1;
+        }
+        .contact-page__bg {
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          opacity: 0.25;
+          pointer-events: none;
+        }
+        .contact-page__bg-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom, var(--black) 0%, transparent 20%, transparent 80%, var(--black) 100%);
         }
         .contact-hero {
           max-width: 800px;
           margin: 0 auto;
+        }
+        
+        .contact-map {
+          margin: 80px auto 0;
+          max-width: 1000px;
+          text-align: center;
+        }
+        .contact-map__title {
+          font-size: clamp(24px, 3vw, 36px);
+          color: var(--white);
+          margin-bottom: 8px;
+        }
+        .contact-map__subtitle {
+          color: var(--cyan);
+          font-family: var(--font-display);
+          font-size: 14px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-bottom: 40px;
+        }
+        .contact-map__iframe-wrap {
+          width: 100%;
+          height: 450px;
+          border-radius: var(--radius-card);
+          overflow: hidden;
+          border: 1px solid rgba(255,255,255,0.06);
+          position: relative;
+          background: var(--surface);
+        }
+        .contact-map__iframe-wrap iframe {
+          width: 100%;
+          height: 100%;
+          filter: invert(90%) hue-rotate(180deg) grayscale(80%) contrast(1.2);
+          transition: filter 0.5s ease;
+        }
+        .contact-map__iframe-wrap:hover iframe {
+          filter: invert(90%) hue-rotate(180deg) grayscale(30%) contrast(1.2);
         }
         .contact-title {
           font-family: var(--font-display);
@@ -130,13 +207,15 @@ export default function ContactPage() {
           text-transform: uppercase;
           line-height: 1;
           margin-bottom: 24px;
+          text-align: center;
         }
         .contact-subtitle {
           font-size: 18px;
           color: rgba(240, 240, 240, 0.7);
           line-height: 1.6;
-          margin-bottom: 48px;
+          margin: 0 auto 48px;
           max-width: 600px;
+          text-align: center;
         }
 
         .contact-form-wrapper {

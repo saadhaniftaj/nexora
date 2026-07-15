@@ -44,9 +44,9 @@ export default function ProgramsSection() {
     <section id="programs" className="programs section" aria-labelledby="programs-heading">
       <div className="container">
         <div className="programs__header">
-          <span className="section-label programs__eyebrow">TRAIN. TRANSFORM. THRIVE.</span>
+          <span className="section-label programs__eyebrow">TRAIN · TRANSFORM · THRIVE</span>
           <h2 id="programs-heading" style={{ whiteSpace: 'nowrap' }}>
-            PROGRAMS FOR EVERY YOU.
+            PROGRAMS FOR EVERY YOU
           </h2>
         </div>
 
@@ -124,10 +124,12 @@ export default function ProgramsSection() {
           overflow: hidden;
         }
         .prog-card__img :global(img) {
-          transition: transform 0.5s ease;
+          transition: transform 0.5s ease, filter 0.5s ease;
+          filter: brightness(0.45) grayscale(0.5);
         }
         .prog-card:hover .prog-card__img :global(img) {
           transform: scale(1.06);
+          filter: brightness(1.1) grayscale(0);
         }
         .prog-card__overlay {
           position: absolute;
@@ -203,8 +205,24 @@ export default function ProgramsSection() {
           .programs__grid { grid-template-columns: repeat(2, 1fr); }
           .prog-card { min-height: 400px; }
         }
-        @media (max-width: 560px) {
-          .programs__grid { grid-template-columns: 1fr; }
+        @media (max-width: 900px) {
+          .programs__grid {
+            display: flex;
+            justify-content: flex-start;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 16px;
+            padding: 0 20px 40px;
+            margin: 0 -20px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+          }
+          .programs__grid::-webkit-scrollbar { display: none; }
+          .prog-card {
+            flex: 0 0 85%;
+            max-width: 85%;
+            scroll-snap-align: center;
+          }
         }
       `}</style>
     </section>

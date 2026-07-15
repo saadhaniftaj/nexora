@@ -7,6 +7,7 @@ import Image from 'next/image'
 export default function CTASection() {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -17,7 +18,7 @@ export default function CTASection() {
       await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email }),
+        body: JSON.stringify({ name, email, phone }),
       })
     } catch {
       // fall through to success state
@@ -47,7 +48,7 @@ export default function CTASection() {
             Your Next Evolution Starts Here
           </span>
           <h2 id="cta-heading" style={{ fontSize: 'clamp(32px, 4.5vw, 60px)', whiteSpace: 'nowrap' }}>
-            Become Your <span className="text-cyan">Next Self.</span>
+            Become Your <span className="text-cyan">Next Self</span>
           </h2>
           <p>
             Commit to yourself. Trust the process. Become your next self.
@@ -84,6 +85,17 @@ export default function CTASection() {
                 />
               </div>
               <div className="cta-section__field">
+                <label htmlFor="cta-phone">Phone Number</label>
+                <input
+                  id="cta-phone"
+                  type="tel"
+                  placeholder="Your phone number"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  autoComplete="tel"
+                />
+              </div>
+              <div className="cta-section__field">
                 <label htmlFor="cta-email">Email Address</label>
                 <input
                   id="cta-email"
@@ -113,8 +125,11 @@ export default function CTASection() {
       <style jsx>{`
         .cta-section {
           position: relative;
-          padding: 120px 0;
+          padding: var(--section-pad-y) 0;
           overflow: hidden;
+          min-height: 950px;
+          display: flex;
+          align-items: center;
         }
         .cta-section__bg {
           position: absolute;
@@ -154,7 +169,7 @@ export default function CTASection() {
         }
         .cta-section__form-eyebrow {
           font-family: var(--font-display);
-          font-size: 11px;
+          font-size: 13px;
           font-weight: 700;
           letter-spacing: 0.22em;
           text-transform: uppercase;

@@ -118,16 +118,24 @@ export default function ProgramCards() {
                 {prog.hook && (
                   <p className="prog-detail-card__marketing-hook">{prog.hook}</p>
                 )}
-                <Link href="#waitlist" className="btn-outline prog-detail-card__btn">
-                  Get Early Access <ArrowRight size={14} />
-                </Link>
               </div>
             </article>
           ))}
         </div>
+
+        <div className="prog-cards__footer">
+          <Link href="/contact" className="btn-primary">
+            Get Early Access <ArrowRight size={16} />
+          </Link>
+        </div>
       </div>
 
       <style jsx>{`
+        .prog-cards__footer {
+          display: flex;
+          justify-content: center;
+          margin-top: 52px;
+        }
         .prog-cards h2 { margin: 8px 0 36px; }
         .prog-tabs {
           display: flex;
@@ -177,8 +185,13 @@ export default function ProgramCards() {
           border-color: var(--cyan-border);
           box-shadow: 0 0 40px rgba(31,178,254,0.08);
         }
+        .prog-detail-card__img :global(img) {
+          filter: brightness(0.5) grayscale(0.6);
+          transition: transform 0.5s ease, filter 0.5s ease !important;
+        }
         .prog-detail-card:hover .prog-detail-card__img :global(img) {
           transform: scale(1.04);
+          filter: brightness(1.1) grayscale(0);
         }
         .prog-detail-card__img {
           position: relative;
@@ -254,7 +267,25 @@ export default function ProgramCards() {
         .prog-detail-card__btn { align-self: flex-start; }
 
         @media (max-width: 900px) {
-          .prog-detail-card { grid-template-columns: 1fr; direction: ltr; }
+          .prog-cards__grid {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 16px;
+            padding: 0 20px 40px;
+            margin: 0 -20px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+          }
+          .prog-cards__grid::-webkit-scrollbar { display: none; }
+          .prog-detail-card { 
+            grid-template-columns: 1fr; 
+            direction: ltr; 
+            flex: 0 0 85%;
+            max-width: 85%;
+            scroll-snap-align: center;
+          }
           .prog-detail-card--reverse { direction: ltr; }
           .prog-detail-card__img { min-height: 260px; }
           .prog-detail-card__img-overlay {

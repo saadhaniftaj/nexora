@@ -4,7 +4,7 @@ import { google } from 'googleapis'
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { name, email } = body
+    const { name, email, phone } = body
 
     if (!name || !email) {
       return NextResponse.json({ error: 'Name and email are required' }, { status: 400 })
@@ -29,16 +29,26 @@ export async function POST(req: Request) {
 
     const sheets = google.sheets({ version: 'v4', auth })
 
-    // Prepare the row data: [Date, Name, Email]
-    const timestamp = new Date().toISOString()
+    // Prepare the row data: [Date, Name, Email, Phone]
+    const timestamp = new Date().toLocaleString('en-US', {
+      timeZone: 'America/Vancouver',
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+      timeZoneName: 'short'
+    })
     
     // Append the row to Sheet1
     await sheets.spreadsheets.values.append({
       spreadsheetId: sheetId,
-      range: 'Sheet1!A:C',
+      range: 'Sheet1!A:D',
       valueInputOption: 'USER_ENTERED',
       requestBody: {
-        values: [[timestamp, name, email]],
+        values: [[timestamp, name, email, phone || 'N/A']],
       },
     })
 

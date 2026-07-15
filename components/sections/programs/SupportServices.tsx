@@ -137,8 +137,25 @@ export default function SupportServices() {
         }
         .support-card:hover .support-card__bar { transform: scaleX(1); }
 
-        @media (max-width: 900px) { .support__grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 560px) { .support__grid { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) {
+          .support__grid {
+            display: flex;
+            justify-content: flex-start;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 16px;
+            padding: 0 20px 40px;
+            margin: 0 -20px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+          }
+          .support__grid::-webkit-scrollbar { display: none; }
+          .support-card {
+            flex: 0 0 85%;
+            max-width: 85%;
+            scroll-snap-align: center;
+          }
+        }
       `}</style>
     </section>
   )

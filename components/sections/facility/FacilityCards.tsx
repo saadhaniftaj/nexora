@@ -42,7 +42,7 @@ const cards = [
 ]
 
 const NAV_ROW_H = 64   // px — height of each nav button row
-const SLIDE_VH  = 100  // viewport-heights each card gets to scroll through
+const SLIDE_VH  = 180  // viewport-heights each card gets to scroll through
 
 export default function FacilityCards() {
   const [activeIdx, setActiveIdx] = useState(0)
@@ -321,6 +321,14 @@ export default function FacilityCards() {
           inset: 0;
           opacity: 0;
           transition: opacity 0.65s ease;
+        }
+        .fc__img :global(img) {
+          filter: brightness(0.5) grayscale(0.6);
+          transition: filter 0.5s ease, transform 0.5s ease !important;
+        }
+        .fc__panel:hover .fc__img :global(img) {
+          filter: brightness(1.1) grayscale(0);
+          transform: scale(1.03);
         }
         .fc__img.active { opacity: 1; }
 

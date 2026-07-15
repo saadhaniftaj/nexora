@@ -11,8 +11,8 @@ export default function CommunitySection() {
           <div className="community__text-inner">
             <span className="community__eyebrow">TOGETHER WE EVOLVE.</span>
             <h2 id="community-heading">
-              MORE THAN A GYM.<br />
-              WE ARE A COMMUNITY.
+              MORE THAN A GYM<br />
+              WE ARE A COMMUNITY
             </h2>
             <p className="community__body">
               Nexora is built on connections, support and elevation. Train with people who push you to be better, celebrate your wins and grow with you. This is where your next chapter begins.
@@ -46,13 +46,13 @@ export default function CommunitySection() {
         }
         .community__split {
           display: flex;
-          min-height: 560px;
+          min-height: 950px;
         }
         .community__content {
           flex: 0 0 50%;
           display: flex;
           align-items: center;
-          padding: 80px 40px;
+          padding: var(--section-pad-y) 40px;
           box-sizing: border-box;
         }
         .community__text-inner {
@@ -63,7 +63,7 @@ export default function CommunitySection() {
         .community__eyebrow {
           display: block;
           font-family: var(--font-display);
-          font-size: 11px;
+          font-size: 13px;
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;

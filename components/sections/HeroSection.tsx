@@ -46,12 +46,12 @@ export default function HeroSection() {
           <div className="hero__headline-wrapper">
             <div className="hero__left-line" />
             <h1 className="hero__headline">
-              <span className="hero__line"><span className="text-cyan text-glow-cyan">POWER</span></span>
-              <span className="hero__line"><span className="text-glow-white">FUELS YOU.</span></span>
-              <span className="hero__line"><span className="text-cyan text-glow-cyan">PROGRESS</span></span>
-              <span className="hero__line"><span className="text-glow-white">SHAPES YOU.</span></span>
-              <span className="hero__line"><span className="text-cyan text-glow-cyan">NE<img src="/logos/HERONEXORAX.png" alt="X" className="nexora-img-x" />ORA</span></span>
-              <span className="hero__line"><span className="text-glow-white">TRANSFORMS YOU.</span></span>
+              <span className="hero__line" style={{ fontSize: '0.8em' }}><span className="text-cyan text-glow-cyan">POWER</span></span>
+              <span className="hero__line" style={{ fontSize: '0.8em' }}><span className="text-glow-white">FUELS YOU</span></span>
+              <span className="hero__line" style={{ fontSize: '0.8em' }}><span className="text-cyan text-glow-cyan">PROGRESS</span></span>
+              <span className="hero__line" style={{ fontSize: '0.8em' }}><span className="text-glow-white">SHAPES YOU</span></span>
+              <span className="hero__line">"<img src="/logos/nexora_text_logo_3.png" alt="NEXORA" className="hero__nexora-logo" /></span>
+              <span className="hero__line"><span className="text-glow-white">TRANSFORMS YOU"</span></span>
             </h1>
           </div>
 
@@ -118,7 +118,7 @@ export default function HeroSection() {
           align-items: center;
           gap: 10px;
           font-family: var(--font-display);
-          font-size: 12px;
+          font-size: 14px;
           font-weight: 700;
           letter-spacing: 0.22em;
           text-transform: uppercase;
@@ -157,7 +157,7 @@ export default function HeroSection() {
           display: flex;
           flex-direction: column;
           font-family: var(--font-orbitron);
-          font-size: clamp(42px, 6.5vw, 90px);
+          font-size: clamp(40px, 6.2vw, 86px);
           font-weight: 800;
           line-height: 0.85;
           margin: 0;
@@ -169,7 +169,7 @@ export default function HeroSection() {
         .hero__line:nth-child(3) { margin-left: clamp(24px, 3.6vw, 48px); }
         .hero__line:nth-child(4) { margin-left: clamp(16px, 2.4vw, 32px); margin-top: -0.15em; }
         .hero__line:nth-child(5) { margin-left: clamp(8px, 1.2vw, 16px); }
-        .hero__line:nth-child(6) { margin-left: 0; margin-top: -0.35em; }
+        .hero__line:nth-child(6) { margin-left: 0; margin-top: -0.15em; }
         .text-cyan { color: var(--cyan); }
         .text-glow-cyan { text-shadow: 0 0 30px rgba(31,178,254,0.6); }
         .text-glow-white { 
@@ -177,14 +177,14 @@ export default function HeroSection() {
           font-size: 0.7em;
         }
 
-        .nexora-img-x {
-          height: 1.4em;
+        .hero__nexora-logo {
+          height: 0.9em;
           width: auto;
-          margin: 0 -0.55em 0 -0.5em;
           display: inline-block;
           vertical-align: middle;
-          transform: translateY(0%);
-          filter: drop-shadow(0 0 24px rgba(31, 178, 254, 0.8));
+          margin-top: -0.1em;
+          margin-left: -0.1em;
+          filter: drop-shadow(0 0 30px rgba(31, 178, 254, 0.6));
         }
 
         .hero__sub-tagline {
