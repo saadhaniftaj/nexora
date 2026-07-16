@@ -69,14 +69,6 @@ export default function FacilityCards() {
 
   return (
     <section className="facility-cards" aria-labelledby="fc-heading">
-      {/* Section header — outside the scroll-lock zone */}
-      <div className="container fc__header">
-        <span className="section-label">Every Detail</span>
-        <h2 id="fc-heading">
-          Designed With <span className="text-cyan">Purpose</span>
-        </h2>
-      </div>
-
       {/*
        * fc__scroll-zone: a tall div whose height = cards × SLIDE_VH.
        * It provides the scroll travel needed to move through all 6 cards.
@@ -87,6 +79,15 @@ export default function FacilityCards() {
       <div className="fc__scroll-zone">
         {/* 1 ── Sticky viewport: stays fixed while user scrolls through scroll-zone */}
         <div className="fc__sticky">
+
+          {/* Section header — inside the sticky zone so it stays visible */}
+          <div className="container fc__header">
+            <span className="section-label">Every Detail</span>
+            <h2 id="fc-heading">
+              Designed With <span className="text-cyan">Purpose</span>
+            </h2>
+          </div>
+
           <div className="fc__layout">
 
             {/* ── LEFT: vertically centred nav ── */}
@@ -202,6 +203,9 @@ export default function FacilityCards() {
           top: 0;
           height: 100vh;
           overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
         /* ── Two-column grid inside the sticky viewport ── */
@@ -209,8 +213,7 @@ export default function FacilityCards() {
           display: grid;
           grid-template-columns: 260px 1fr;
           gap: 32px;
-          height: 100%;
-          margin-top: -80px;
+          width: 100%;
           align-items: center;          /* vertically centers both columns */
           padding: 0 max(32px, calc((100vw - 1200px) / 2));
         }
@@ -411,7 +414,6 @@ export default function FacilityCards() {
             grid-template-columns: 1fr;
             padding: 0 16px;
             align-items: center;
-            margin-top: 0;
           }
           .fc__nav { display: none; }
           .fc__panel { 
