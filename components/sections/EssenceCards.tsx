@@ -90,7 +90,7 @@ export default function EssenceCards() {
       <div className="container">
         <span className="section-label">Nexora Essence</span>
         <h2 id="essence-heading">
-          The gym New Westminster deserved
+          The gym New Westminster<br />deserved
         </h2>
         <p className="essence__intro">
           Nexora isn't an upgrade to what's already here — it's what's been missing. A facility built around real training, real recovery, and a location that nothing else in the city can match.

@@ -6,7 +6,11 @@
 /* ── Global link reset — kill browser default blue underline everywhere ── */
 a { color: inherit; text-decoration: none; }
 
-html { scroll-behavior: smooth; }
+html { 
+  scroll-behavior: smooth; 
+  overflow-x: hidden;
+  max-width: 100vw;
+}
 
 body {
   background: var(--black);
@@ -15,6 +19,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100vw;
   -webkit-font-smoothing: antialiased;
 }
 
