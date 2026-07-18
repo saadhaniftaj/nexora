@@ -6,7 +6,7 @@ import FacilityCards from '@/components/sections/facility/FacilityCards'
 export const metadata: Metadata = {
   title: 'The Facility | Premium Gym Floor, Private Washrooms & Fraser River Views — Nexora Fitness',
   description:
-    '5,000 sq ft premium training facility at River Market, Downtown New Westminster. Curated Atlantis Strength, Shua, Xmaster & Core Health equipment. Private gender-neutral washrooms, InBody assessment, on-site physio & RMT. Fraser River views from every angle.',
+    'Premium training facility at River Market, Downtown New Westminster. Curated Atlantis Strength, Shua, Xmaster & Core Health equipment. Private gender-neutral washrooms, InBody assessment, on-site physio & RMT. Fraser River views from every angle.',
   alternates: { canonical: 'https://nexorafitness.ca/facility' },
 }
 

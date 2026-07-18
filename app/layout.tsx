@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: '%s | Nexora Fitness',
   },
   description:
-    'Nexora Fitness is a premium training facility opening at River Market, Downtown New Westminster, BC. 5,000 sq ft of curated equipment — Atlantis, Core Health & Wellness, Shua, Xmaster, Torque, Bootybuilder — Fraser River views, private washrooms, on-site physio. Join the founding member waitlist.',
+    'Nexora Fitness is a premium training facility opening at River Market, Downtown New Westminster, BC. Curated equipment — Atlantis, Core Health & Wellness, Shua, Xmaster, Torque, Bootybuilder — Fraser River views, private washrooms, on-site physio. Join the founding member waitlist.',
   keywords: [
     'premium gym New Westminster',
     'downtown New Westminster gym',

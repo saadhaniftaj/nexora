@@ -15,7 +15,7 @@ const cards = [
     id: 2,
     number: '02',
     title: 'Space & Atmosphere',
-    body: 'Train in 5,000 sq ft of unobstructed open floor facing the Fraser River. While other gyms pack in bodies, we pack in space. Every session is uninterrupted. Every set is yours.',
+    body: 'Train in an unobstructed open floor facing the Fraser River. While other gyms pack in bodies, we pack in space. Every session is uninterrupted. Every set is yours.',
     img: '/images/sections/card-space.png',
   },
   {

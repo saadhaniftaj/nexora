@@ -24,7 +24,7 @@ export default function FacilityHero() {
       <div className="facility-hero__bg" ref={bgRef}>
         <Image
           src="/images/hero/hero-facility.png"
-          alt="Nexora Fitness 5000 sq ft premium training floor, Downtown New Westminster"
+          alt="Nexora Fitness premium training floor, Downtown New Westminster"
           fill
           priority
           sizes="100vw"
