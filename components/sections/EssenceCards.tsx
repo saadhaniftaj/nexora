@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { ChevronRight, ChevronLeft } from 'lucide-react'
 
@@ -51,12 +51,32 @@ const extendedCards = [...cards, ...cards, ...cards, ...cards].map((c, i) => ({ 
 
 export default function EssenceCards() {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [activeIdx, setActiveIdx] = useState<number | null>(null)
+  const cardRefs = useRef<(HTMLElement | null)[]>([])
 
   // Initialize at the second set so user can scroll left immediately
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({ left: scrollRef.current.scrollWidth / 4, behavior: 'auto' })
     }
+  }, [])
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+    cardRefs.current.forEach((el, idx) => {
+      if (!el) return
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveIdx(idx)
+          }
+        },
+        { root: scrollRef.current, rootMargin: '0px -40% 0px -40%', threshold: 0 }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+    return () => observers.forEach(o => o.disconnect())
   }, [])
 
   const handleScroll = () => {
@@ -103,8 +123,12 @@ export default function EssenceCards() {
 
           <div className="essence__grid-container">
             <div className="essence__grid" ref={scrollRef} onScroll={handleScroll}>
-              {extendedCards.map((card) => (
-                <article key={card.uniqueId} className="essence__card">
+              {extendedCards.map((card, idx) => (
+                <article 
+                  key={card.uniqueId} 
+                  className={`essence__card ${activeIdx === idx ? 'active' : ''}`}
+                  ref={el => { cardRefs.current[idx] = el }}
+                >
                   <div className="essence__card-img">
                     <Image src={card.img} alt={card.title} fill sizes="400px" style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }} />
                     <div className="essence__card-img-overlay" />
@@ -196,7 +220,7 @@ export default function EssenceCards() {
         .essence__card:last-child {
           border-right: 1px solid rgba(255,255,255,0.05);
         }
-        .essence__card:hover {
+        .essence__card:hover, .essence__card.active {
           transform: scale(1.03) translateY(-4px);
           border-color: var(--cyan-border);
           box-shadow: 0 0 40px rgba(31,178,254,0.15);
@@ -205,7 +229,7 @@ export default function EssenceCards() {
           filter: brightness(0.5) grayscale(0.6);
           transition: transform 0.5s ease, filter 0.5s ease !important;
         }
-        .essence__card:hover :global(img) {
+        .essence__card:hover :global(img), .essence__card.active :global(img) {
           transform: scale(1.06);
           filter: brightness(1.1) grayscale(0);
         }
@@ -276,8 +300,26 @@ export default function EssenceCards() {
         }
 
         @media (max-width: 900px) { 
-          .essence__content-wrapper { display: block; }
-          .essence__side-arrow { display: none; }
+          .essence__content-wrapper { 
+            position: relative;
+            display: flex; 
+          }
+          .essence__side-arrow { 
+            position: absolute;
+            z-index: 10;
+            background: rgba(8,8,8,0.7);
+            border-radius: 50%;
+            height: 48px;
+            width: 48px;
+            padding: 0;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+          .essence__side-arrow:first-child { left: 5px; }
+          .essence__side-arrow:last-child { right: 5px; }
+          .essence__side-arrow:hover {
+            transform: translateY(-50%) scale(1.1);
+          }
 
           .essence__grid-container {
             margin: 0 -20px; /* Bleed to edges on mobile */

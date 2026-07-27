@@ -54,15 +54,7 @@ export const metadata: Metadata = {
     description:
       "New Westminster's most premium gym. Founding member waitlist now open. Atlantis equipment, Fraser River views, private washrooms, on-site physio & recovery.",
   },
-  icons: {
-    icon: [
-      { url: '/favicons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicons/favicon.ico' },
-    ],
-    apple: { url: '/favicons/apple-touch-icon.png' },
-    other: { url: '/favicons/favicon-192x192.png', sizes: '192x192' },
-  },
+
   robots: {
     index: true,
     follow: true,

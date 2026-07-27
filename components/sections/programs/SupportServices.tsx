@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { UserPlus, LineChart, ShieldCheck, Dumbbell, Stethoscope, ChevronRight, ChevronLeft } from 'lucide-react'
 
 const services = [
@@ -40,12 +40,32 @@ const extendedServices = [...services, ...services, ...services, ...services].ma
 
 export default function SupportServices() {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [activeIdx, setActiveIdx] = useState<number | null>(null)
+  const cardRefs = useRef<(HTMLElement | null)[]>([])
 
   // Initialize at the second set so user can scroll left immediately
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({ left: scrollRef.current.scrollWidth / 4, behavior: 'auto' })
     }
+  }, [])
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+    cardRefs.current.forEach((el, idx) => {
+      if (!el) return
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveIdx(idx)
+          }
+        },
+        { root: scrollRef.current, rootMargin: '0px -40% 0px -40%', threshold: 0 }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+    return () => observers.forEach(o => o.disconnect())
   }, [])
 
   const handleScroll = () => {
@@ -88,10 +108,14 @@ export default function SupportServices() {
           </button>
           
           <div className="support__grid" ref={scrollRef} onScroll={handleScroll}>
-            {extendedServices.map((service) => {
+            {extendedServices.map((service, idx) => {
               const Icon = service.icon
               return (
-                <article key={service.uniqueId} className="support-card">
+                <article 
+                  key={service.uniqueId} 
+                  className={`support-card ${activeIdx === idx ? 'active' : ''}`}
+                  ref={el => { cardRefs.current[idx] = el }}
+                >
                   {service.tag && <span className="support-card__tag">{service.tag}</span>}
                   <div className="support-card__icon">
                     <Icon size={22} strokeWidth={1.5} />
@@ -165,7 +189,7 @@ export default function SupportServices() {
           overflow: hidden;
           transition: all 0.3s ease;
         }
-        .support-card:hover {
+        .support-card:hover, .support-card.active {
           border-color: var(--cyan-border);
           box-shadow: 0 0 40px rgba(31,178,254,0.08);
           transform: translateY(-4px);
@@ -217,12 +241,29 @@ export default function SupportServices() {
           transform-origin: left;
           transition: transform 0.35s ease;
         }
-        .support-card:hover .support-card__bar { transform: scaleX(1); }
+        .support-card:hover .support-card__bar, .support-card.active .support-card__bar { transform: scaleX(1); }
 
         @media (max-width: 900px) {
-          .slider-arrow { display: none; }
           .support__carousel-wrapper {
+            position: relative;
             margin: 0 -20px;
+          }
+          .slider-arrow {
+            position: absolute;
+            z-index: 10;
+            background: rgba(8,8,8,0.7);
+            border-radius: 50%;
+            height: 48px;
+            width: 48px;
+            padding: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+          }
+          .slider-arrow--left { left: 10px; }
+          .slider-arrow--right { right: 10px; }
+          .slider-arrow:hover {
+            transform: translateY(-50%) scale(1.1);
           }
           .support__grid {
             padding: 0 20px 40px;
