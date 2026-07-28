@@ -1,8 +1,9 @@
 'use client'
 
+import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Dumbbell, Heart, Zap, Leaf } from 'lucide-react'
+import { ArrowRight, Dumbbell, Heart, Zap, Leaf, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const programs = [
   {
@@ -40,6 +41,35 @@ const programs = [
 ]
 
 export default function ProgramsSection() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [activeIdx, setActiveIdx] = useState<number | null>(null)
+  const cardRefs = useRef<(HTMLElement | null)[]>([])
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+    cardRefs.current.forEach((el, idx) => {
+      if (!el) return
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveIdx(idx)
+          }
+        },
+        { root: scrollRef.current, rootMargin: '0px -40% 0px -40%', threshold: 0 }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+    return () => observers.forEach(o => o.disconnect())
+  }, [])
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = 300
+      scrollRef.current.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' })
+    }
+  }
+
   return (
     <section id="programs" className="programs section" aria-labelledby="programs-heading">
       <div className="container">
@@ -50,25 +80,39 @@ export default function ProgramsSection() {
           </h2>
         </div>
 
-        <div className="programs__grid">
-          {programs.map((prog) => (
-            <article key={prog.id} className="prog-card">
-              <div className="prog-card__img">
-                <Image src={prog.img} alt={prog.label} fill sizes="(max-width:900px) 100vw, 25vw" style={{ objectFit: 'cover' }} />
-                <div className="prog-card__overlay" />
-              </div>
-              <div className="prog-card__icon-wrapper">
-                <prog.Icon size={22} />
-              </div>
-              <div className="prog-card__body">
-                <h3 className="prog-card__label">{prog.label}</h3>
-                <p className="prog-card__desc">{prog.body}</p>
-                <Link href={prog.href} className="prog-card__cta">
-                  Explore Program <ArrowRight size={14} />
-                </Link>
-              </div>
-            </article>
-          ))}
+        <div className="programs__carousel-wrapper">
+          <button className="slider-arrow slider-arrow--left" onClick={() => scroll('left')} aria-label="Scroll left">
+            <ChevronLeft size={36} strokeWidth={1} />
+          </button>
+
+          <div className="programs__grid" ref={scrollRef}>
+            {programs.map((prog, idx) => (
+              <article 
+                key={prog.id} 
+                className={`prog-card ${activeIdx === idx ? 'active' : ''}`}
+                ref={el => { cardRefs.current[idx] = el }}
+              >
+                <div className="prog-card__img">
+                  <Image src={prog.img} alt={prog.label} fill sizes="(max-width:900px) 100vw, 25vw" style={{ objectFit: 'cover' }} />
+                  <div className="prog-card__overlay" />
+                </div>
+                <div className="prog-card__icon-wrapper">
+                  <prog.Icon size={22} />
+                </div>
+                <div className="prog-card__body">
+                  <h3 className="prog-card__label">{prog.label}</h3>
+                  <p className="prog-card__desc">{prog.body}</p>
+                  <Link href={prog.href} className="prog-card__cta">
+                    Explore Program <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <button className="slider-arrow slider-arrow--right" onClick={() => scroll('right')} aria-label="Scroll right">
+            <ChevronRight size={36} strokeWidth={1} />
+          </button>
         </div>
 
         <div className="programs__footer">
@@ -201,11 +245,60 @@ export default function ProgramsSection() {
         .prog-card__cta:hover { gap: 10px; text-shadow: 0 0 16px rgba(31, 178, 254, 0.9); }
         .prog-card:hover .prog-card__cta { gap: 10px; text-shadow: 0 0 16px rgba(31, 178, 254, 0.9); }
 
+        .slider-arrow { display: none; }
+
         @media (max-width: 1024px) {
           .programs__grid { grid-template-columns: repeat(2, 1fr); }
           .prog-card { min-height: 400px; }
         }
         @media (max-width: 900px) {
+          .programs__carousel-wrapper {
+            position: relative;
+            margin: 0 -20px;
+          }
+          .slider-arrow {
+            position: absolute;
+            z-index: 10;
+            background: rgba(8,8,8,0.7);
+            border-radius: 50%;
+            height: 48px;
+            width: 48px;
+            padding: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(31, 178, 254, 0.4);
+            border: none;
+            cursor: pointer;
+          }
+          .slider-arrow--left { left: 10px; }
+          .slider-arrow--right { right: 10px; }
+          .slider-arrow:hover {
+            color: var(--cyan);
+            transform: translateY(-50%) scale(1.1);
+            filter: drop-shadow(0 0 12px var(--cyan));
+          }
+          
+          .prog-card.active {
+            transform: translateY(-8px);
+            border-color: var(--cyan-border);
+            box-shadow: var(--glow-md);
+          }
+          .prog-card.active .prog-card__img :global(img) {
+            transform: scale(1.06);
+            filter: brightness(1.1) grayscale(0);
+          }
+          .prog-card.active .prog-card__icon-wrapper {
+            color: var(--white);
+            box-shadow: 0 0 25px rgba(255,255,255,0.6);
+            border-color: rgba(255,255,255,0.4);
+          }
+          .prog-card.active .prog-card__cta {
+            gap: 10px; text-shadow: 0 0 16px rgba(31, 178, 254, 0.9);
+          }
+
           .programs__grid {
             display: flex;
             justify-content: flex-start;
