@@ -329,7 +329,7 @@ export default function EssenceCards() {
 
           .essence__grid-container {
             order: 1;
-            width: 100vw;
+            flex: 0 0 100vw;
             margin: 0 calc(-50vw + 50%);
             padding: 0;
           }

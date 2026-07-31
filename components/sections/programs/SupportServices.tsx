@@ -272,7 +272,7 @@ export default function SupportServices() {
           }
           .support__grid {
             order: 1;
-            width: 100vw;
+            flex: 0 0 100vw;
             padding: 0 20px 20px;
             margin: 0 calc(-50vw + 50%);
             gap: 16px;

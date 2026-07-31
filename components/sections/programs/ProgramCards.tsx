@@ -351,7 +351,7 @@ export default function ProgramCards() {
 
           .prog-cards__grid {
             order: 1;
-            width: 100vw;
+            flex: 0 0 100vw;
             display: flex;
             flex-direction: row;
             overflow-x: auto;

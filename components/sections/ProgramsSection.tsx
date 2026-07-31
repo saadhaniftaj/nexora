@@ -299,7 +299,7 @@ export default function ProgramsSection() {
 
           .programs__grid {
             order: 1;
-            width: 100vw;
+            flex: 0 0 100vw;
             display: flex;
             justify-content: flex-start;
             overflow-x: auto;
