@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const programs = [
   {
@@ -62,11 +62,40 @@ const TABS = ['All', 'Strength', 'Conditioning', 'Functional Training', 'Sculpt 
 
 export default function ProgramCards() {
   const [activeTab, setActiveTab] = useState('All')
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [activeIdx, setActiveIdx] = useState<number | null>(null)
+  const cardRefs = useRef<(HTMLElement | null)[]>([])
 
   const filtered =
     activeTab === 'All'
       ? programs
       : programs.filter((p) => p.label === activeTab)
+
+  useEffect(() => {
+    setActiveIdx(0)
+    const observers: IntersectionObserver[] = []
+    cardRefs.current.forEach((el, idx) => {
+      if (!el) return
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveIdx(idx)
+          }
+        },
+        { root: scrollRef.current, rootMargin: '0px -40% 0px -40%', threshold: 0 }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+    return () => observers.forEach(o => o.disconnect())
+  }, [filtered])
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = window.innerWidth > 0 ? window.innerWidth * 0.8 : 300
+      scrollRef.current.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' })
+    }
+  }
 
   return (
     <section className="prog-cards section" aria-labelledby="prog-cards-heading">
@@ -90,37 +119,52 @@ export default function ProgramCards() {
         </div>
 
         {/* Program cards */}
-        <div className="prog-cards__grid">
-          {filtered.map((prog, i) => (
-            <article key={prog.id} id={prog.anchor} className={`prog-detail-card ${i % 2 === 1 ? 'prog-detail-card--reverse' : ''}`}>
-              <div className="prog-detail-card__img">
-                <Image
-                  src={prog.img}
-                  alt={prog.label}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 50vw"
-                  style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
-                />
-                <div className="prog-detail-card__img-overlay" />
-              </div>
-              <div className="prog-detail-card__body">
-                <span className="prog-detail-card__label">{prog.label}</span>
-                <h3 className="prog-detail-card__tagline">{prog.tagline}</h3>
-                <p className="prog-detail-card__desc">{prog.body}</p>
-                <ul className="prog-detail-card__hooks">
-                  {prog.hooks.map((h) => (
-                    <li key={h}>
-                      <span className="hook-dot" />
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-                {prog.hook && (
-                  <p className="prog-detail-card__marketing-hook">{prog.hook}</p>
-                )}
-              </div>
-            </article>
-          ))}
+        <div className="prog-cards__carousel-wrapper">
+          <button className="slider-arrow slider-arrow--left" onClick={() => scroll('left')} aria-label="Scroll left">
+            <ChevronLeft size={36} strokeWidth={1} />
+          </button>
+
+          <div className="prog-cards__grid" ref={scrollRef}>
+            {filtered.map((prog, i) => (
+              <article 
+                key={prog.id} 
+                id={prog.anchor} 
+                ref={(el) => { cardRefs.current[i] = el }}
+                className={`prog-detail-card ${i % 2 === 1 ? 'prog-detail-card--reverse' : ''} ${activeIdx === i ? 'active' : ''}`}
+              >
+                <div className="prog-detail-card__img">
+                  <Image
+                    src={prog.img}
+                    alt={prog.label}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 50vw"
+                    style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                  />
+                  <div className="prog-detail-card__img-overlay" />
+                </div>
+                <div className="prog-detail-card__body">
+                  <span className="prog-detail-card__label">{prog.label}</span>
+                  <h3 className="prog-detail-card__tagline">{prog.tagline}</h3>
+                  <p className="prog-detail-card__desc">{prog.body}</p>
+                  <ul className="prog-detail-card__hooks">
+                    {prog.hooks.map((h) => (
+                      <li key={h}>
+                        <span className="hook-dot" />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                  {prog.hook && (
+                    <p className="prog-detail-card__marketing-hook">{prog.hook}</p>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <button className="slider-arrow slider-arrow--right" onClick={() => scroll('right')} aria-label="Scroll right">
+            <ChevronRight size={36} strokeWidth={1} />
+          </button>
         </div>
 
         <div className="prog-cards__footer">
@@ -266,7 +310,47 @@ export default function ProgramCards() {
         }
         .prog-detail-card__btn { align-self: flex-start; }
 
+        .slider-arrow { display: none; }
+
         @media (max-width: 900px) {
+          .prog-cards__carousel-wrapper {
+            position: relative;
+            margin: 0 -20px;
+          }
+          .slider-arrow {
+            position: absolute;
+            z-index: 10;
+            background: rgba(8,8,8,0.7);
+            border-radius: 50%;
+            height: 48px;
+            width: 48px;
+            padding: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(31, 178, 254, 0.4);
+            border: none;
+            cursor: pointer;
+          }
+          .slider-arrow--left { left: 10px; }
+          .slider-arrow--right { right: 10px; }
+          .slider-arrow:hover {
+            color: var(--cyan);
+            transform: translateY(-50%) scale(1.1);
+            filter: drop-shadow(0 0 12px var(--cyan));
+          }
+
+          .prog-detail-card.active {
+            border-color: var(--cyan-border);
+            box-shadow: 0 0 40px rgba(31,178,254,0.08);
+          }
+          .prog-detail-card.active .prog-detail-card__img :global(img) {
+            transform: scale(1.04);
+            filter: brightness(1.1) grayscale(0);
+          }
+
           .prog-cards__grid {
             display: flex;
             flex-direction: row;
