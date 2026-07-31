@@ -314,31 +314,29 @@ export default function ProgramCards() {
 
         @media (max-width: 900px) {
           .prog-cards__carousel-wrapper {
-            position: relative;
-            margin: 0 -20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
           }
           .slider-arrow {
-            position: absolute;
-            z-index: 10;
+            position: static;
+            order: 2;
             background: rgba(8,8,8,0.7);
             border-radius: 50%;
             height: 48px;
             width: 48px;
-            padding: 0;
-            top: 50%;
-            transform: translateY(-50%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: rgba(31, 178, 254, 0.4);
-            border: none;
+            border: 1px solid rgba(255,255,255,0.1);
             cursor: pointer;
+            margin: 16px 8px 0;
+            transform: none;
           }
-          .slider-arrow--left { left: 10px; }
-          .slider-arrow--right { right: 10px; }
           .slider-arrow:hover {
             color: var(--cyan);
-            transform: translateY(-50%) scale(1.1);
             filter: drop-shadow(0 0 12px var(--cyan));
           }
 
@@ -352,13 +350,15 @@ export default function ProgramCards() {
           }
 
           .prog-cards__grid {
+            order: 1;
+            width: 100vw;
             display: flex;
             flex-direction: row;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             gap: 16px;
-            padding: 0 20px 40px;
-            margin: 0 -20px;
+            padding: 0 20px 20px;
+            margin: 0 calc(-50vw + 50%);
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
           }

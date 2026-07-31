@@ -301,33 +301,41 @@ export default function EssenceCards() {
 
         @media (max-width: 900px) { 
           .essence__content-wrapper { 
-            position: relative;
-            display: flex; 
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
           }
           .essence__side-arrow { 
-            position: absolute;
-            z-index: 10;
+            position: static;
+            order: 2;
             background: rgba(8,8,8,0.7);
             border-radius: 50%;
             height: 48px;
             width: 48px;
-            padding: 0;
-            top: 50%;
-            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(31, 178, 254, 0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            margin: 16px 8px 0;
+            transform: none;
           }
-          .essence__side-arrow:first-child { left: 5px; }
-          .essence__side-arrow:last-child { right: 5px; }
           .essence__side-arrow:hover {
-            transform: translateY(-50%) scale(1.1);
+            color: var(--cyan);
+            filter: drop-shadow(0 0 12px var(--cyan));
           }
 
           .essence__grid-container {
-            margin: 0 -20px; /* Bleed to edges on mobile */
+            order: 1;
+            width: 100vw;
+            margin: 0 calc(-50vw + 50%);
             padding: 0;
           }
 
           .essence__grid {
-            padding: 0 20px 40px; /* Padding for scroll shadow & edges */
+            padding: 0 20px 20px; /* Padding for scroll shadow & edges */
             gap: 0;
           }
           
