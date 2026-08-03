@@ -199,9 +199,15 @@ export default function SupportServices() {
           transition: all 0.3s ease;
         }
         .support-card:hover, .support-card.active {
-          border-color: var(--cyan-border);
-          box-shadow: 0 0 40px rgba(31,178,254,0.08);
+          border-color: var(--cyan);
+          box-shadow: 0 0 40px rgba(31,178,254,0.2), inset 0 0 20px rgba(31,178,254,0.05);
           transform: translateY(-4px);
+        }
+        .support-card:hover .support-card__icon, .support-card.active .support-card__icon {
+          background: rgba(31,178,254,0.15);
+          border-color: var(--cyan);
+          box-shadow: 0 0 20px rgba(31,178,254,0.4);
+          transform: scale(1.05);
         }
         .support-card__tag {
           position: absolute;
