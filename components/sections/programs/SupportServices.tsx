@@ -46,7 +46,12 @@ export default function SupportServices() {
   // Initialize at the second set so user can scroll left immediately
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTo({ left: scrollRef.current.scrollWidth / 4, behavior: 'auto' })
+      const child = scrollRef.current.firstElementChild as HTMLElement
+      if (child) {
+        const gap = window.innerWidth <= 900 ? 16 : 20
+        const singleSetWidth = (child.offsetWidth + gap) * 5
+        scrollRef.current.scrollTo({ left: singleSetWidth, behavior: 'auto' })
+      }
     }
   }, [])
 
@@ -70,8 +75,12 @@ export default function SupportServices() {
 
   const handleScroll = () => {
     if (!scrollRef.current) return
-    const { scrollLeft, scrollWidth } = scrollRef.current
-    const singleSetWidth = scrollWidth / 4
+    const child = scrollRef.current.firstElementChild as HTMLElement
+    if (!child) return
+
+    const { scrollLeft } = scrollRef.current
+    const gap = window.innerWidth <= 900 ? 16 : 20
+    const singleSetWidth = (child.offsetWidth + gap) * 5
 
     // If we've scrolled into the 4th set, silently jump back to the 3rd set
     if (scrollLeft >= singleSetWidth * 3) {

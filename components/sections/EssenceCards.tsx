@@ -57,7 +57,11 @@ export default function EssenceCards() {
   // Initialize at the second set so user can scroll left immediately
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTo({ left: scrollRef.current.scrollWidth / 4, behavior: 'auto' })
+      const child = scrollRef.current.firstElementChild as HTMLElement
+      if (child) {
+        const singleSetWidth = child.offsetWidth * 5
+        scrollRef.current.scrollTo({ left: singleSetWidth, behavior: 'auto' })
+      }
     }
   }, [])
 
@@ -81,8 +85,11 @@ export default function EssenceCards() {
 
   const handleScroll = () => {
     if (!scrollRef.current) return
-    const { scrollLeft, scrollWidth } = scrollRef.current
-    const singleSetWidth = scrollWidth / 4
+    const child = scrollRef.current.firstElementChild as HTMLElement
+    if (!child) return
+
+    const { scrollLeft } = scrollRef.current
+    const singleSetWidth = child.offsetWidth * 5
 
     // If we've scrolled into the 4th set, silently jump back to the 3rd set
     if (scrollLeft >= singleSetWidth * 3) {
