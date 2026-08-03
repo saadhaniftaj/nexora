@@ -230,6 +230,7 @@ export default function EssenceCards() {
         .essence__card:hover, .essence__card.active {
           transform: scale(1.03) translateY(-4px);
           border-color: var(--cyan-border);
+          border-bottom-color: var(--cyan);
           box-shadow: 0 0 40px rgba(31,178,254,0.15);
         }
         .essence__card :global(img) {
