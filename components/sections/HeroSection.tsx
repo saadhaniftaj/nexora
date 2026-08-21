@@ -216,6 +216,20 @@ export default function HeroSection() {
           transition: opacity 0.3s ease;
         }
         .hero__btn-primary:hover::after { opacity: 1; }
+
+        @media (max-width: 900px) {
+          .hero__bg-wrap {
+            inset: 0; /* Eliminates the artificial container zoom on mobile */
+            animation: heroZoomOutMobile 14s ease-out forwards;
+          }
+          .hero__bg-wrap :global(img) {
+            object-position: 65% center !important; /* Shifts focus to the right scenery */
+          }
+        }
+        @keyframes heroZoomOutMobile {
+          from { transform: scale(1.05); }
+          to { transform: scale(1); }
+        }
       `}</style>
     </section>
   )
