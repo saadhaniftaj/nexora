@@ -11,7 +11,7 @@ const cards = [
     title: 'Curated Equipment',
     sub: 'Atlantis, Core Health & Wellness, Shua, Xmaster, Torque, Bootybuilder. Every machine is personally selected.',
     body: 'A zero-compromise strength environment. Every piece of equipment chosen with intention — from biomechanics to durability to feel.',
-    img: '/images/sections/card-equipment.png',
+    img: '/images/sections/card-equipment-alt.png',
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const cards = [
     title: 'A Massive Floor. World-Class Views.',
     sub: 'Fraser River views from every angle. No crowded corridors, no waiting for equipment — ample room to train.',
     body: 'Nexora gives you an open, premium training environment with views of the Fraser River. Just a clean, modern floor designed to give you room to train with intention.',
-    img: '/images/sections/card-space.png',
+    img: '/images/sections/card-space-alt.jpg',
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const cards = [
     title: 'Private Washrooms',
     sub: 'Your space, own showers, zero waiting, all gender-neutral by design, complete privacy.',
     body: 'Five private individual washrooms with showers give every member a more comfortable experience — no shared locker room pressure.',
-    img: '/images/sections/card-privacy.png',
+    img: '/images/sections/card-privacy-alt.png',
   },
   {
     id: 4,
@@ -35,7 +35,7 @@ const cards = [
     title: 'Inbody Assessment',
     sub: 'Body Composition analyzer to better understand your body.',
     body: 'The machine helps you differentiate between fat, protein, minerals, and body water — giving you a real snapshot of your health and progress.',
-    img: '/images/sections/card-inbody.png',
+    img: '/images/sections/card-inbody-alt.jpg',
   },
   {
     id: 5,
@@ -43,7 +43,7 @@ const cards = [
     title: 'Train and Recover Here',
     sub: 'On-site physio and RMT.',
     body: 'Nexora is designed to support more than workouts. Our on-site physio and massage room creates a direct connection between training, recovery, and long-term performance.',
-    img: '/images/sections/card-rehab.png',
+    img: '/images/sections/card-rehab-alt.jpg',
   },
 ]
 
@@ -111,7 +111,7 @@ export default function EssenceCards() {
   return (
     <section id="essence" className="essence section" aria-labelledby="essence-heading">
       <div className="essence__bg">
-        <Image src="/images/nexora_reception_bg.png" alt="Nexora Reception" fill sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center' }} />
+        <Image src="/images/nexora_reception_bg_alt.png" alt="Nexora Reception" fill sizes="100vw" style={{ objectFit: 'cover', objectPosition: 'center' }} />
         <div className="essence__bg-overlay" />
       </div>
       <div className="container">

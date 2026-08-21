@@ -25,7 +25,7 @@ export default function HeroSection() {
       {/* Background Image with parallax */}
       <div className="hero__bg-wrap" ref={bgRef}>
         <Image
-          src="/images/hero/hero-home.png"
+          src="/images/hero/hero-home-alt.jpg"
           alt="Nexora Fitness gym floor with Fraser River view, Downtown New Westminster"
           fill
           priority
