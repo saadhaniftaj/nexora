@@ -12,7 +12,7 @@ const services = [
   },
   {
     icon: LineChart,
-    title: 'InBody Assessment',
+    title: 'Body Assessment',
     body: 'Medical-grade Body Composition analyzer to better understand your body — fat, protein, minerals, and body water for a real snapshot of your progress.',
     tag: null,
   },

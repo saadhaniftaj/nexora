@@ -28,7 +28,7 @@ const cards = [
   {
     id: 4,
     number: '04',
-    title: 'Inbody Assessment',
+    title: 'Body Assessment',
     body: 'Medical-grade body composition analyzer helps you differentiate between fat, protein, minerals, and body water — giving you a real snapshot of your health and progress.',
     img: '/images/sections/card-inbody.png',
   },

@@ -32,7 +32,7 @@ const cards = [
   {
     id: 4,
     eyebrow: 'Medical Grade',
-    title: 'Inbody Assessment',
+    title: 'Body Assessment',
     sub: 'Body Composition analyzer to better understand your body.',
     body: 'The machine helps you differentiate between fat, protein, minerals, and body water — giving you a real snapshot of your health and progress.',
     img: '/images/sections/card-inbody-alt.jpg',

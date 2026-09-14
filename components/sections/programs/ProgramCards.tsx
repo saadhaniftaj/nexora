@@ -51,7 +51,7 @@ const programs = [
     label: 'Active Rehab & Wellness',
     tagline: 'Train with longevity.',
     body: "Nexora's wellness direction connects movement, recovery, mobility and stability with consistency. With on-site physio and massage, we support our members in a long-term active lifestyle.",
-    hooks: ['On-Site Physiotherapy', 'InBody Assessments', 'Mobility & Recovery'],
+    hooks: ['On-Site Physiotherapy', 'Body Assessments', 'Mobility & Recovery'],
     hook: null,
     img: '/images/sections/card-wellness.png',
     anchor: 'rehab',
