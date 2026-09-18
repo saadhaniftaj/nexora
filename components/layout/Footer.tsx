@@ -52,7 +52,7 @@ export default function Footer() {
                 New Westminster BC V3M 6B9
               </span>
             </a>
-            <a href="tel:+12368657524" className="footer__link">+1 236-865-7524</a>
+            <a href="tel:+12368690218" className="footer__link">+1 236-869-0218</a>
             <Link href="/contact" className="footer__link">Leave a Message</Link>
             <a href="mailto:info@nexorafitness.ca" className="footer__link">info@nexorafitness.ca</a>
             <p className="footer__hours">24/7</p>
