@@ -52,7 +52,7 @@ export default function Footer() {
                 New Westminster BC V3M 6B9
               </span>
             </a>
-            <a href="tel:+12368690218" className="footer__link">+1 236-869-0218</a>
+            <a href="tel:+12368690218" className="footer__link footer__phone">+1 236-869-0218</a>
             <Link href="/contact" className="footer__link">Leave a Message</Link>
             <a href="mailto:info@nexorafitness.ca" className="footer__link">info@nexorafitness.ca</a>
             <p className="footer__hours">24/7</p>
@@ -157,6 +157,10 @@ export default function Footer() {
         }
         .footer__address p { font-size: 14px; color: var(--muted); margin: 0; }
         .footer__hours { color: var(--cyan) !important; }
+        .footer__phone {
+          color: var(--cyan) !important;
+          text-shadow: 0 0 16px rgba(31, 178, 254, 0.4);
+        }
 
         .footer__bottom {
           border-top: 1px solid rgba(255,255,255,0.04);
